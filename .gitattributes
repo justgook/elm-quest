@@ -1,3 +1,3 @@
 bundle.js linguist-generated=true
-examples/* linguist-detectable=false
+gh-pages/* linguist-detectable=false
 *.html linguist-vendored

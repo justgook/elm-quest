@@ -1,0 +1,9 @@
+{
+  "name": "elm-rpg",
+  "description": "Fantasy game written in elm",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Romans Potasovs <justgook@gmail.com>",
+  "private": true,
+  "license": "MIT"
+}

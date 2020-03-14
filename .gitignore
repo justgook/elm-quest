@@ -1,0 +1,38 @@
+#Logs
+logs
+*.log
+
+#Dependencies
+node_modules/
+elm-stuff/
+
+# Develop
+examples/index.html
+examples/bundle.js
+
+# Yarn Integrity file
+.yarn-integrity
+
+#Generated tests
+tests/VerifyExamples
+
+#OS stuff
+.DS_Store
+.vscode
+*.iml
+/.idea
+
+#Other stuff
+documentation.json
+
+#Deployment
+gh-pages/*
+!gh-pages/assets
+!gh-pages/assets/*
+!gh-pages/404.html
+!gh-pages/index_template.html
+!gh-pages/app.css
+!gh-pages/favicon.png
+!gh-pages/screenshot.png
+!gh-pages/script.js
+!gh-pages/CNAME

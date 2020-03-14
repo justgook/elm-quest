@@ -1,6 +1,7 @@
 bundle.js linguist-generated=true
 posthtml.config.js linguist-generated=true
 transform.js linguist-generated=true
+build-assets.js linguist-generated=true
 gh-pages/* linguist-detectable=false
 .github/* linguist-detectable=false
 *.html linguist-vendored

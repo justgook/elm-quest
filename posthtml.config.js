@@ -10,7 +10,7 @@ const info = {
     twitterName: "@justgook",
     image: "Main.png",
     favicon: "gh-pages/favicon.png",
-    url: packageJson.repository.url.slice(0, -4),
+    url: packageJson.repository.homepage,
 };
 const socialTags_ = ({ facebook, twitter }) =>
     ({

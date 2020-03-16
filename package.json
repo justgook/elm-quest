@@ -6,6 +6,10 @@
   "author": "Romans Potasovs <justgook@gmail.com>",
   "private": true,
   "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/justgook/elm-quest.git"
+  },
   "dependencies": {
     "glslx": "0.1.26",
     "htmlnano": "0.2.5",

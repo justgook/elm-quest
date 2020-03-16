@@ -10,7 +10,7 @@ const info = {
     twitterName: "@justgook",
     image: "Main.png",
     favicon: "gh-pages/favicon.png",
-    url: "https://justgook.github.io/elm-rpg/"
+    url: packageJson.repository.url.slice(0, -4),
 };
 const socialTags_ = ({ facebook, twitter }) =>
     ({
@@ -42,10 +42,10 @@ const socialTags_ = ({ facebook, twitter }) =>
 const buildSocialTags = ({ url, image, title, description, version, license, twitterName, facebookId }) => socialTags_({
     facebook: {
         type: "website",
-        url: "https://justgook.github.io/elm-rpg/",
+        url: `${url}/`,
         title,
         description,
-        image: url + image,
+        image: `${url}/${image}`,
         image_width: 640,
         image_height: 384,
         facebookId
@@ -55,8 +55,8 @@ const buildSocialTags = ({ url, image, title, description, version, license, twi
         // domain: "z0.lv",
         title,
         description,
-        image: url + image,
-        url: "https://justgook.github.io/elm-rpg/",
+        image: `${url}/${image}`,
+        url: `${url}/`,
         label1: "Version",
         data1: version,
         label2: "License",

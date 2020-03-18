@@ -52,8 +52,8 @@ to have numeric types.
 -}
 type Matrix a
     = Matrix
-        { nrows : Int
-        , ncols : Int
+        { h : Int
+        , w : Int
         , mvect : Array a
         }
 
@@ -66,8 +66,8 @@ type Matrix a
 empty : Matrix a
 empty =
     Matrix
-        { nrows = 0
-        , ncols = 0
+        { h = 0
+        , w = 0
         , mvect = Array.empty
         }
 
@@ -78,11 +78,11 @@ empty =
 
 -}
 repeat : Int -> Int -> a -> Matrix a
-repeat nrows ncols value =
+repeat h w value =
     Matrix
-        { nrows = nrows
-        , ncols = ncols
-        , mvect = Array.repeat (nrows * ncols) value
+        { h = h
+        , w = w
+        , mvect = Array.repeat (h * w) value
         }
 
 
@@ -101,17 +101,17 @@ repeat nrows ncols value =
 
 -}
 initialize : Int -> Int -> (( Int, Int ) -> a) -> Matrix a
-initialize nrows ncols f =
+initialize h w f =
     let
         f_ i =
-            f (decode ncols i)
+            f (decode w i)
 
         data =
-            Array.initialize (nrows * ncols) f_
+            Array.initialize (h * w) f_
     in
     Matrix
-        { nrows = nrows
-        , ncols = ncols
+        { h = h
+        , w = w
         , mvect = data
         }
 
@@ -134,15 +134,15 @@ identity n =
 {-| Return the number of rows in a given matrix.
 -}
 height : Matrix a -> Int
-height (Matrix { nrows }) =
-    nrows
+height (Matrix { h }) =
+    h
 
 
 {-| Return the number of columns in a given matrix.
 -}
 width : Matrix a -> Int
-width (Matrix { ncols }) =
-    ncols
+width (Matrix { w }) =
+    w
 
 
 {-| Return the dimensions of a given matrix in the form `(rows, columns)`.
@@ -155,12 +155,12 @@ size m =
 {-| Return `Just` the element at the index or `Nothing` if the index is out of bounds.
 -}
 get : Int -> Int -> Matrix a -> Maybe a
-get i j (Matrix { nrows, ncols, mvect }) =
-    if i > nrows || j > ncols then
+get i j (Matrix { h, w, mvect }) =
+    if i > h || j > w then
         Nothing
 
     else
-        Array.get (encode ncols ( i, j )) mvect
+        Array.get (encode w ( i, j )) mvect
 
 
 {-| Create a matrix from a list given the desired size.
@@ -219,8 +219,8 @@ fromLists list =
 map : (a -> b) -> Matrix a -> Matrix b
 map f (Matrix m) =
     Matrix
-        { nrows = m.nrows
-        , ncols = m.ncols
+        { h = m.h
+        , w = m.w
         , mvect = Array.map f m.mvect
         }
 
@@ -314,18 +314,18 @@ pretty toString m =
 
 
 encode : Int -> ( Int, Int ) -> Int
-encode ncols ( i, j ) =
-    (i - 1) * ncols + j - 1
+encode w ( i, j ) =
+    (i - 1) * w + j - 1
 
 
 decode : Int -> Int -> ( Int, Int )
-decode ncols index =
+decode w index =
     let
         q =
-            index // ncols
+            index // w
 
         r =
-            remainderBy ncols index
+            remainderBy w index
     in
     ( q + 1, r + 1 )
 

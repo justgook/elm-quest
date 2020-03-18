@@ -2,11 +2,11 @@ module RPG.Component.Asset.Body exposing (get)
 
 import Playground exposing (Shape, group)
 import Playground.Extra
-import RPG.Component.Action as Action exposing (Action, Pose(..))
+import RPG.Component.Animation as Action exposing (Animation, Pose(..))
 import RPG.Component.Body exposing (Body(..))
 
 
-get : Body -> Action -> Shape
+get : Body -> Animation -> Shape
 get body action =
     let
         i =

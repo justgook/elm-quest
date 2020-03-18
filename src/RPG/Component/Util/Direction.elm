@@ -73,17 +73,22 @@ toRecord dir =
 
 fromRecord : { a | x : Float, y : Float } -> Direction
 fromRecord { x, y } =
-    if x > 0 then
-        East
+    let
+        ax =
+            abs x
 
-    else if x < 0 then
-        West
+        ay =
+            abs y
+    in
+    if ax > ay then
+        if x > 0 then
+            East
+
+        else
+            West
 
     else if y > 0 then
         North
-
-    else if y < 0 then
-        South
 
     else
         South

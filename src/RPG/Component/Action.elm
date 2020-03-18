@@ -1,30 +1,14 @@
-module RPG.Component.Action exposing (Action, Pose(..), empty, index, spawn, spec)
+module RPG.Component.Action exposing (Action, empty, spawn, spec)
 
 import Logic.Component as Component
-import RPG.Component.Util.Direction exposing (Direction(..))
+import Logic.Entity exposing (EntityID)
 
 
 type alias Action =
-    { time : Float
-    , pose : Pose
-    , speed : Float
-    , dir : Direction
-    , frame : Int
+    { arrows : { x : Float, y : Float }
+    , attack : Bool
+    , target : Maybe { x : Float, y : Float }
     }
-
-
-type Pose
-    = Stand
-    | Walk
-    | Hurt
-    | Slash
-    | Cast
-    | Shoot
-    | Pierce
-
-
-type alias Velocity =
-    { x : Float, y : Float }
 
 
 spec : Component.Spec Action { world | action : Component.Set Action }
@@ -39,54 +23,7 @@ empty =
 
 spawn : Action
 spawn =
-    { pose = Walk
-    , time = 0
-    , speed = 0.01
-    , dir = South
-    , frame = 0
+    { arrows = { x = 0, y = 0 }
+    , attack = False
+    , target = Nothing
     }
-
-
-
---Util
-
-
-index : Action -> Int
-index { pose, dir, frame } =
-    (case pose of
-        Stand ->
-            0
-
-        Walk ->
-            105
-
-        Hurt ->
-            261
-
-        Slash ->
-            157
-
-        Cast ->
-            1
-
-        Shoot ->
-            209
-
-        Pierce ->
-            53
-    )
-        |> (+)
-            (case dir of
-                North ->
-                    0
-
-                East ->
-                    39
-
-                South ->
-                    26
-
-                West ->
-                    13
-            )
-        |> (+) frame

@@ -1,7 +1,7 @@
-module RPG.System.Action exposing (system)
+module RPG.System.Animation exposing (system)
 
 import Logic.System as System exposing (System)
-import RPG.Component.Action as Action exposing (Action, Pose(..))
+import RPG.Component.Animation as Action exposing (Animation, Pose(..))
 import RPG.World exposing (World)
 
 
@@ -10,7 +10,7 @@ system delta =
     System.step (next delta) Action.spec
 
 
-next : Float -> Action -> Action
+next : Float -> Animation -> Animation
 next delta ({ speed, pose, dir } as action) =
     let
         time =

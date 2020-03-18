@@ -1,10 +1,12 @@
-module RPG.Component.Position exposing (Position, empty, spec)
+module RPG.Component.Position exposing (Position, empty, spawn, spec)
 
 import Logic.Component as Component
 
 
 type alias Position =
-    { x : Float, y : Float }
+    { x : Float
+    , y : Float
+    }
 
 
 spec : Component.Spec Position { world | p : Component.Set Position }
@@ -15,3 +17,8 @@ spec =
 empty : Component.Set Position
 empty =
     Component.empty
+
+
+spawn : { a | x : Float, y : Float } -> Position
+spawn { x, y } =
+    { x = x, y = y }

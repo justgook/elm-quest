@@ -63,7 +63,7 @@ main =
             \m ->
                 { title = "RPG"
                 , body =
-                    [ Html.node "style" [] [ Html.text "html,body{margin:0;padding:0;overflow:hidden;}canvas{display:block}" ]
+                    [ Html.node "style" [] [ Html.text <| "html,body{cursor:url(" ++ m.world.ui.cursor ++ "), auto;margin:0;padding:0;overflow:hidden;}canvas{display:block}" ]
                     , view m
                     ]
                 }

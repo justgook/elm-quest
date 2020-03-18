@@ -1,7 +1,11 @@
 module RPG.System exposing (system)
 
 import RPG.Game as Game exposing (Message(..), Model)
-import RPG.System.Action as Action
+import RPG.System.Ai as PathRandomizer
+import RPG.System.Animation as Action
+import RPG.System.Input as Input
+import RPG.System.Movement as Movement
+import RPG.System.Path as Path
 import RPG.System.Render as Render
 import Set
 import Task
@@ -13,7 +17,11 @@ system delta ({ textures } as model) =
     let
         world =
             model.world
+                |> Path.system delta
+                |> Input.system 5
+                |> Movement.system
                 |> Action.system delta
+                |> PathRandomizer.system model.screen
 
         ( entities, missing ) =
             Render.system { model | world = world }

@@ -20,6 +20,7 @@ set =
     \comps world -> { world | id = comps }
 
 
+create : { world | id : IdSource } -> ( EntityID, { world | id : IdSource } )
 create world =
     let
         ({ next, pool } as comp) =
@@ -33,6 +34,7 @@ create world =
             Entity.create next (set { comp | next = next + 1 } world)
 
 
+remove : EntityID -> { world | id : IdSource } -> ( EntityID, { world | id : IdSource } )
 remove entityID world =
     let
         comp =

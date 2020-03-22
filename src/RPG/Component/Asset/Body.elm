@@ -1,6 +1,6 @@
 module RPG.Component.Asset.Body exposing (get)
 
-import Playground exposing (Shape, group)
+import Playground exposing (Shape, group, moveY)
 import Playground.Extra
 import RPG.Component.Animation as Action exposing (Animation, Pose(..))
 import RPG.Component.Body exposing (Body(..))
@@ -45,6 +45,10 @@ get body action =
             femaleLizard i
     ]
         |> group
+
+
+
+--|> moveY 16
 
 
 tile url =

@@ -21,7 +21,7 @@ system screen world =
             Ai.spec.get world
 
         toGrid =
-            Grid.toGrid world.grid
+            Grid.fromScreen world.grid
 
         ( comps, seed ) =
             System.indexedFoldl2 (step toGrid screen) pathComps aiComps ( pathComps, world.seed )

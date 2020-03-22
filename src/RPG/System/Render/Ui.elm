@@ -2,7 +2,7 @@ module RPG.System.Render.Ui exposing (system)
 
 import Playground exposing (..)
 import Playground.Extra exposing (..)
-import RPG.System.Render.Util
+import WebGL.Ui exposing (slice9)
 
 
 
@@ -16,7 +16,7 @@ config =
     }
 
 
-system { bottom, left, top, width } { ui } =
+system { bottom, left, right, top, width } { ui } =
     [ --TopLeft
       [ rectangle green (width * 0.5 - config.padding) config.height |> fade 0
       , health 1 1 0.3
@@ -61,7 +61,7 @@ system { bottom, left, top, width } { ui } =
     --Center
     ]
         |> (if ui.inventory then
-                (::) inventory
+                (::) (scale 2 inventory |> move (right - 110) (top - 175))
 
             else
                 identity
@@ -97,14 +97,31 @@ hotkeys w =
 
 
 inventory =
-    [ box 100 100 |> move 25 100
-    , [ box 150 30, words white "INVENTORY" ]
+    let
+        cell =
+            border2 16 16
+    in
+    List.range 0 14
+        |> List.map (\i -> cell |> move (toFloat (modBy 5 i) * 17 - 34) (17 * toFloat (floor (toFloat i / 5))))
+        |> (::) (border 102 102)
+        |> (::) (moveY 67 (group [ border 102 30, words white "INVENTORY" |> scale 0.5 ]))
         |> group
-        |> moveY 190
-    , box 20 100
-        |> move -65 100
-    ]
-        |> group
+
+
+border =
+    slice9
+        "assets/ui/ui-sheet.png"
+        { bounds = { x = 1, y = 34, w = 67, h = 39 }
+        , slice = { x = 9, y = 9, w = 50, h = 24 }
+        }
+
+
+border2 =
+    slice9
+        "assets/ui/ui-sheet.png"
+        { bounds = { x = 69, y = 34, w = 8, h = 8 }
+        , slice = { x = 4, y = 4, w = 1, h = 1 }
+        }
 
 
 health h s m =
@@ -119,39 +136,12 @@ health h s m =
         |> group
 
 
-box w h =
-    [ --- center
-      rectangle bg (w + 1) (h + 1)
-
-    ------- sides
-    , spriteRepeat { xmin = 12, xmax = 68, ymin = 34, ymax = 40 } (w + 1) 7
-        |> move 0.5 (h * 0.5 + 3.5)
-    , spriteRepeat { xmin = 70, xmax = 78, ymin = 42, ymax = 64 } 9 (h + 1.5)
-        |> move (w * 0.5 + 4.5) 0.5
-    , spriteRepeat { xmin = 12, xmax = 68, ymin = 66, ymax = 72 } (w + 1) 7
-        |> move 0.5 -(h * 0.5 + 3.5)
-    , spriteRepeat { xmin = 1, xmax = 10, ymin = 42, ymax = 64 } 10 (h + 1.5)
-        |> move (-w * 0.5 - 5) 0.5
-
-    --corner
-    , spriteRepeat { xmin = 1, xmax = 10, ymin = 34, ymax = 40 } 10 7
-        |> move (-w * 0.5 - 5) (h * 0.5 + 3.5)
-    , spriteRepeat { xmin = 70, xmax = 78, ymin = 34, ymax = 40 } 9 7
-        |> move (w * 0.5 + 4.5) (h * 0.5 + 3.5)
-    , spriteRepeat { xmin = 70, xmax = 78, ymin = 66, ymax = 72 } 9 7
-        |> move (w * 0.5 + 4.5) -(h * 0.5 + 3.5)
-    , spriteRepeat { xmin = 1, xmax = 10, ymin = 66, ymax = 72 } 10 7
-        |> move (-w * 0.5 - 5) -(h * 0.5 + 3.5)
-    ]
-        |> group
-
-
 sprite =
     Playground.Extra.sprite "assets/ui/ui-sheet.png"
 
 
 spriteRepeat =
-    RPG.System.Render.Util.sprite "assets/ui/ui-sheet.png"
+    WebGL.Ui.repeat "assets/ui/ui-sheet.png"
 
 
 red =

@@ -6,6 +6,7 @@ import Browser.Events as Events
 import Dict exposing (Dict)
 import Html exposing (Html)
 import Html.Attributes exposing (height, width)
+import Html.Lazy
 import RPG.Game as Game exposing (Message(..))
 import RPG.Subscription.Keyboard
 import RPG.Subscription.Pointer
@@ -63,9 +64,14 @@ main =
             \m ->
                 { title = "RPG"
                 , body =
-                    [ Html.node "style" [] [ Html.text <| "html,body{cursor:url(" ++ m.world.ui.cursor ++ "), auto;margin:0;padding:0;overflow:hidden;}canvas{display:block}" ]
-                    , view m
+                    [ view m
                     ]
+                        |> (if m.world.debug then
+                                (::) (Html.Lazy.lazy2 css m.world.ui.cursor m.world.grid)
+
+                            else
+                                identity
+                           )
                 }
         , update = update
         , subscriptions =
@@ -77,6 +83,32 @@ main =
                     , RPG.Subscription.Pointer.subscription model |> Sub.map Subscription
                     ]
         }
+
+
+css cursor { offset, cellW, cellH } =
+    Html.node "style" [] [ Html.text <| """
+html,body{
+    cursor:url(""" ++ cursor ++ """), auto;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    width:100%;
+    height:100%;
+    }
+canvas{display:block}
+body::after {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: """ ++ String.fromFloat cellW ++ """px """ ++ String.fromFloat cellH ++ """px;
+    background-position: calc(""" ++ String.fromFloat -offset.x ++ """px + 50%) calc(""" ++ String.fromFloat offset.y ++ """px + 50%);
+    background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px);
+}
+    """ ]
 
 
 update : Message -> Game.Model -> ( Game.Model, Cmd Message )

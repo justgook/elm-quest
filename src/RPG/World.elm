@@ -1,13 +1,13 @@
 module RPG.World exposing (World, world)
 
-import AltMath.Vector2 exposing (Vec2)
 import Logic.Component as Component
-import Logic.Entity as Entity
+import Logic.Entity as Entity exposing (EntityID)
 import RPG.Component.Action as Action exposing (Action)
 import RPG.Component.Ai as Ai exposing (Ai)
 import RPG.Component.Animation as Animation exposing (Animation)
 import RPG.Component.Body as Body exposing (Body(..))
 import RPG.Component.Equipment as Equipment exposing (Equipment)
+import RPG.Component.Fx as Fx exposing (Fx)
 import RPG.Component.Grid as Grid exposing (Grid)
 import RPG.Component.IdSource as IdSource exposing (IdSource)
 import RPG.Component.Path as Path exposing (Path)
@@ -21,6 +21,7 @@ import Random exposing (Seed)
 
 type alias World =
     { id : IdSource
+    , you : EntityID
     , seed : Seed
     , grid : Grid
     , p : Component.Set Position
@@ -33,12 +34,19 @@ type alias World =
     , ai : Component.Set Ai
     , mouse : Mouse
     , ui : Ui
+    , fx : Component.Set Fx
+    , debug : Bool
     }
 
 
 world : World
 world =
+    let
+        you =
+            5
+    in
     { id = IdSource.empty 0
+    , you = you
     , seed = Random.initialSeed 42
     , grid = Grid.empty 10 10
     , p = Position.empty
@@ -51,9 +59,11 @@ world =
     , ai = Ai.empty
     , mouse = Mouse.empty
     , ui = Ui.empty
+    , fx = Fx.empty
+    , debug = False
     }
         |> (\w -> List.foldl spawn w bodies)
-        |> Tuple.pair 5
+        |> Tuple.pair you
         |> Entity.remove Ai.spec
         |> Tuple.second
 
@@ -66,7 +76,6 @@ spawn ( body, p ) =
         >> Entity.with ( Velocity.spec, Vec2.zero )
         >> Entity.with ( Path.spec, [] )
         >> Entity.with ( Ai.spec, Ai.spawn )
-        -->> Entity.with ( Action.spec, Action.spawn )
         >> Tuple.second
 
 
@@ -75,14 +84,14 @@ bodies =
         zombieParts =
             { arm = False, brain = False, eye = False, mouth = False, ribs = False }
     in
-    [ ( MaleDrake, { x = -152, y = 0 } )
-    , ( MaleLizard, { x = -112, y = 0 } )
-    , ( MaleOrc, { x = -80, y = 0 } )
-    , ( Male Nothing Nothing Nothing, { x = -48, y = 0 } )
-    , ( Skeleton, { x = -16, y = 0 } )
-    , ( Zombie zombieParts, { x = 16, y = 0 } )
-    , ( Female Nothing Nothing Nothing, { x = 48, y = 0 } )
-    , ( FemaleOrc, { x = 80, y = 0 } )
-    , ( FemaleLizard, { x = 112, y = 0 } )
-    , ( FemaleDrake, { x = 152, y = 0 } )
+    [ ( MaleDrake, { x = -160, y = 0 } )
+    , ( MaleLizard, { x = -128, y = 0 } )
+    , ( MaleOrc, { x = -96, y = 0 } )
+    , ( Male Nothing Nothing Nothing, { x = -64, y = 0 } )
+    , ( Skeleton, { x = -32, y = 0 } )
+    , ( Zombie zombieParts, { x = 0, y = 0 } )
+    , ( Female Nothing Nothing Nothing, { x = 32, y = 0 } )
+    , ( FemaleOrc, { x = 64, y = 0 } )
+    , ( FemaleLizard, { x = 96, y = 0 } )
+    , ( FemaleDrake, { x = 128, y = 0 } )
     ]

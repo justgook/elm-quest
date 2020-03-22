@@ -1,6 +1,6 @@
 module RPG.System.Path exposing (system)
 
-import AltMath.Vector2 as Vec2
+import AltMath.Vector2 as Vec2 exposing (Vec2, vec2)
 import Logic.System as System exposing (System)
 import RPG.Component.Animation as Animation exposing (Pose(..))
 import RPG.Component.Grid as Grid
@@ -14,30 +14,39 @@ import RPG.World exposing (World)
 
 system : Float -> System World
 system delta world =
-    System.step4 (next delta (Grid.toGrid world.grid)) Position.spec Path.spec Velocity.spec Animation.spec world
+    System.step4 (next delta world.grid) Position.spec Path.spec Velocity.spec Animation.spec world
 
 
-next delta toGrid ( p, setP ) ( path, setPath ) ( v, setV ) ( anim, setAnim ) acc =
+speed =
+    -- px / s
+    120
+
+
+next delta grid ( p, setP ) ( path, setPath ) ( v, setV ) ( anim, setAnim ) acc =
     case path of
         target :: rest ->
             let
                 distance =
-                    Vec2.sub target (toGrid p)
+                    Vec2.sub target (Grid.toGrid grid p)
 
                 dir =
                     distance
                         |> Direction.fromRecord
             in
-            if distance == Vec2.zero then
+            if Vec2.zero == distance then
                 acc
                     |> setPath rest
                     |> setV Vec2.zero
                     |> setAnim { anim | pose = Stand }
+                    |> setP (Grid.fromGrid grid target)
 
             else
                 acc
                     |> setAnim { anim | dir = dir, pose = Walk }
-                    |> setV (Direction.toRecord dir)
+                    |> setV
+                        (Direction.toRecord dir
+                            |> Vec2.scale (speed * delta * 0.001)
+                        )
 
         [] ->
             acc

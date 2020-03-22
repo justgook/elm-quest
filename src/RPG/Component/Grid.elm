@@ -1,22 +1,31 @@
-module RPG.Component.Grid exposing (Grid, empty, toGrid)
+module RPG.Component.Grid exposing (Grid, empty, fromGrid, fromScreen, toGrid)
 
 import AltMath.Vector2 exposing (Vec2)
 import RPG.Component.Util.Matrix as Matrix exposing (Matrix)
-import RPG.Component.Util.Vec2 as Vec2
 
 
-toGrid { config, offset } { x, y } =
-    { x = round (x + offset.x) // config.cellW |> toFloat
-    , y = round (y + offset.y) // config.cellH |> toFloat
+fromScreen { cellW, cellH, offset } { x, y } =
+    { x = round ((x + offset.x) / cellW) |> toFloat
+    , y = round ((y + offset.y) / cellH) |> toFloat
+    }
+
+
+fromGrid { cellW, cellH } { x, y } =
+    { x = x * cellW
+    , y = y * cellH
+    }
+
+
+toGrid { cellW, cellH, offset } { x, y } =
+    { x = round (x / cellW) |> toFloat
+    , y = round (y / cellH) |> toFloat
     }
 
 
 type alias Grid =
     { collision : Matrix ()
-    , config :
-        { cellW : Int
-        , cellH : Int
-        }
+    , cellW : Float
+    , cellH : Float
     , offset : Vec2
     }
 
@@ -24,9 +33,7 @@ type alias Grid =
 empty : Int -> Int -> Grid
 empty w h =
     { collision = Matrix.repeat h w ()
-    , config =
-        { cellW = 32
-        , cellH = 32
-        }
-    , offset = Vec2.zero
+    , cellW = 32
+    , cellH = 32
+    , offset = Vec2 0 0
     }

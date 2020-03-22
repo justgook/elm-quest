@@ -10,7 +10,7 @@ type alias Ui =
 empty : Ui
 empty =
     { cursor = cursor
-    , inventory = False
+    , inventory = True
     }
 
 

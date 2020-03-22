@@ -3,6 +3,8 @@ module RPG.System exposing (system)
 import RPG.Game as Game exposing (Message(..), Model)
 import RPG.System.Ai as PathRandomizer
 import RPG.System.Animation as Action
+import RPG.System.Fx as Fx
+import RPG.System.Grid as Grid
 import RPG.System.Input as Input
 import RPG.System.Movement as Movement
 import RPG.System.Path as Path
@@ -22,6 +24,8 @@ system delta ({ textures } as model) =
                 |> Movement.system
                 |> Action.system delta
                 |> PathRandomizer.system model.screen
+                |> Fx.system model.screen delta
+                |> Grid.system delta
 
         ( entities, missing ) =
             Render.system { model | world = world }

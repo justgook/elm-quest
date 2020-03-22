@@ -6213,15 +6213,10 @@ var $author$project$RPG$Game$Resize = F2(
 var $author$project$RPG$Game$Subscription = function (a) {
 	return {$: 'Subscription', a: a};
 };
-var $elm$core$Basics$apL = F2(
-	function (f, x) {
-		return f(x);
-	});
 var $elm$core$Basics$apR = F2(
 	function (x, f) {
 		return f(x);
 	});
-var $elm$core$Basics$append = _Utils_append;
 var $elm$core$Result$Err = function (a) {
 	return {$: 'Err', a: a};
 };
@@ -6251,6 +6246,7 @@ var $elm$core$Maybe$Just = function (a) {
 var $elm$core$Maybe$Nothing = {$: 'Nothing'};
 var $elm$core$String$all = _String_all;
 var $elm$core$Basics$and = _Basics_and;
+var $elm$core$Basics$append = _Utils_append;
 var $elm$json$Json$Encode$encode = _Json_encode;
 var $elm$core$String$fromInt = _String_fromNumber;
 var $elm$core$String$join = F2(
@@ -6482,6 +6478,10 @@ var $elm$core$Elm$JsArray$initialize = _JsArray_initialize;
 var $elm$core$Array$Leaf = function (a) {
 	return {$: 'Leaf', a: a};
 };
+var $elm$core$Basics$apL = F2(
+	function (f, x) {
+		return f(x);
+	});
 var $elm$core$Basics$eq = _Utils_equal;
 var $elm$core$Basics$floor = _Basics_floor;
 var $elm$core$Elm$JsArray$length = _JsArray_length;
@@ -6610,6 +6610,10 @@ var $elm$core$Result$isOk = function (result) {
 };
 var $elm$core$Platform$Cmd$batch = _Platform_batch;
 var $elm$core$Platform$Sub$batch = _Platform_batch;
+var $elm$core$String$fromFloat = _String_fromNumber;
+var $elm$core$Basics$negate = function (n) {
+	return -n;
+};
 var $elm$json$Json$Decode$map = _Json_map1;
 var $elm$json$Json$Decode$map2 = _Json_map2;
 var $elm$json$Json$Decode$succeed = _Json_succeed;
@@ -6625,6 +6629,28 @@ var $elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
 			return 3;
 	}
 };
+var $elm$virtual_dom$VirtualDom$node = function (tag) {
+	return _VirtualDom_node(
+		_VirtualDom_noScript(tag));
+};
+var $elm$html$Html$node = $elm$virtual_dom$VirtualDom$node;
+var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+var $author$project$Main$css = F2(
+	function (cursor, _v0) {
+		var offset = _v0.offset;
+		var cellW = _v0.cellW;
+		var cellH = _v0.cellH;
+		return A3(
+			$elm$html$Html$node,
+			'style',
+			_List_Nil,
+			_List_fromArray(
+				[
+					$elm$html$Html$text(
+					'\nhtml,body{\n    cursor:url(' + (cursor + ('), auto;\n    margin:0;\n    padding:0;\n    overflow:hidden;\n    width:100%;\n    height:100%;\n    }\ncanvas{display:block}\nbody::after {\n    pointer-events: none;\n    content: "";\n    position: absolute;\n    top: 0;\n    right: 0;\n    bottom: 0;\n    left: 0;\n    background-size: ' + ($elm$core$String$fromFloat(cellW) + ('px ' + ($elm$core$String$fromFloat(cellH) + ('px;\n    background-position: calc(' + ($elm$core$String$fromFloat(-offset.x) + ('px + 50%) calc(' + ($elm$core$String$fromFloat(offset.y) + 'px + 50%);\n    background-image: linear-gradient(to right, grey 1px, transparent 1px), linear-gradient(to bottom, grey 1px, transparent 1px);\n}\n    '))))))))))
+				]));
+	});
 var $elm$browser$Browser$External = function (a) {
 	return {$: 'External', a: a};
 };
@@ -6931,9 +6957,6 @@ var $elm$core$Set$Set_elm_builtin = function (a) {
 	return {$: 'Set_elm_builtin', a: a};
 };
 var $elm$core$Set$empty = $elm$core$Set$Set_elm_builtin($elm$core$Dict$empty);
-var $elm$core$Basics$negate = function (n) {
-	return -n;
-};
 var $author$project$RPG$Util$toScreen = F2(
 	function (width, height) {
 		return {bottom: (-height) / 2, height: height, left: (-width) / 2, right: width / 2, top: height / 2, width: width};
@@ -6962,34 +6985,34 @@ var $author$project$RPG$World$bodies = function () {
 		[
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$MaleDrake,
-			{x: -152, y: 0}),
+			{x: -160, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$MaleLizard,
-			{x: -112, y: 0}),
+			{x: -128, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$MaleOrc,
-			{x: -80, y: 0}),
+			{x: -96, y: 0}),
 			_Utils_Tuple2(
 			A3($author$project$RPG$Component$Body$Male, $elm$core$Maybe$Nothing, $elm$core$Maybe$Nothing, $elm$core$Maybe$Nothing),
-			{x: -48, y: 0}),
+			{x: -64, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$Skeleton,
-			{x: -16, y: 0}),
+			{x: -32, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$Zombie(zombieParts),
-			{x: 16, y: 0}),
+			{x: 0, y: 0}),
 			_Utils_Tuple2(
 			A3($author$project$RPG$Component$Body$Female, $elm$core$Maybe$Nothing, $elm$core$Maybe$Nothing, $elm$core$Maybe$Nothing),
-			{x: 48, y: 0}),
+			{x: 32, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$FemaleOrc,
-			{x: 80, y: 0}),
+			{x: 64, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$FemaleLizard,
-			{x: 112, y: 0}),
+			{x: 96, y: 0}),
 			_Utils_Tuple2(
 			$author$project$RPG$Component$Body$FemaleDrake,
-			{x: 152, y: 0})
+			{x: 128, y: 0})
 		]);
 }();
 var $justgook$elm_game_logic$Logic$Component$empty = $elm$core$Array$empty;
@@ -6998,6 +7021,11 @@ var $author$project$RPG$Component$Ai$empty = $justgook$elm_game_logic$Logic$Comp
 var $author$project$RPG$Component$Animation$empty = $justgook$elm_game_logic$Logic$Component$empty;
 var $author$project$RPG$Component$Body$empty = $justgook$elm_game_logic$Logic$Component$empty;
 var $author$project$RPG$Component$Equipment$empty = $justgook$elm_game_logic$Logic$Component$empty;
+var $author$project$RPG$Component$Fx$empty = $justgook$elm_game_logic$Logic$Component$empty;
+var $justgook$alt_linear_algebra$AltMath$Vector2$Vec2 = F2(
+	function (x, y) {
+		return {x: x, y: y};
+	});
 var $author$project$RPG$Component$Util$Matrix$Matrix = function (a) {
 	return {$: 'Matrix', a: a};
 };
@@ -7019,27 +7047,24 @@ var $author$project$RPG$Component$Util$Matrix$repeat = F3(
 				w: w
 			});
 	});
-var $justgook$alt_linear_algebra$AltMath$Vector2$Vec2 = F2(
-	function (x, y) {
-		return {x: x, y: y};
-	});
-var $author$project$RPG$Component$Util$Vec2$zero = A2($justgook$alt_linear_algebra$AltMath$Vector2$Vec2, 0, 0);
 var $author$project$RPG$Component$Grid$empty = F2(
 	function (w, h) {
 		return {
+			cellH: 32,
+			cellW: 32,
 			collision: A3($author$project$RPG$Component$Util$Matrix$repeat, h, w, _Utils_Tuple0),
-			config: {cellH: 32, cellW: 32},
-			offset: $author$project$RPG$Component$Util$Vec2$zero
+			offset: A2($justgook$alt_linear_algebra$AltMath$Vector2$Vec2, 0, 0)
 		};
 	});
 var $author$project$RPG$Component$IdSource$empty = function (next) {
 	return {next: next, pool: _List_Nil};
 };
 var $author$project$RPG$Component$Path$empty = $justgook$elm_game_logic$Logic$Component$empty;
+var $author$project$RPG$Component$Util$Vec2$zero = A2($justgook$alt_linear_algebra$AltMath$Vector2$Vec2, 0, 0);
 var $author$project$RPG$Component$Pointer$empty = {down: false, p: $author$project$RPG$Component$Util$Vec2$zero};
 var $author$project$RPG$Component$Position$empty = $justgook$elm_game_logic$Logic$Component$empty;
 var $author$project$RPG$Component$Ui$cursor = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAARCAYAAADpPU2iAAAAAXNSR0IArs4c6QAAAL1JREFUKJGVkrENgzAQAI9XJOhYAdFYSokQC3gIpqDILJmC1CnSUKZD9DSIFejoSOXIgAXmm3/Jf3+29aRJvnAhBOAKJACf990bElP4QgIw1x0AVRGeQjeAqMyY6w6tAGKe5MswtsGhISozALSaDk1iG3yglcEHWhlcsYV2bzADmj5Gq2kHCUDTx3+DyVpNTkjMoW2wITuGsd0bmj525sfrCxCIPcFcwc52M0CQJvlSFaHzh7bNpjhbuNWK/ADDZWjuLvOJVwAAAABJRU5ErkJggg==';
-var $author$project$RPG$Component$Ui$empty = {cursor: $author$project$RPG$Component$Ui$cursor, inventory: false};
+var $author$project$RPG$Component$Ui$empty = {cursor: $author$project$RPG$Component$Ui$cursor, inventory: true};
 var $author$project$RPG$Component$Velocity$empty = $justgook$elm_game_logic$Logic$Component$empty;
 var $elm$random$Random$Seed = F2(
 	function (a, b) {
@@ -7510,42 +7535,45 @@ var $author$project$RPG$World$spawn = function (_v0) {
 									_Utils_Tuple2($author$project$RPG$Component$Ai$spec, $author$project$RPG$Component$Ai$spawn)),
 								$elm$core$Tuple$second)))))));
 };
-var $author$project$RPG$World$world = A2(
-	$justgook$elm_game_logic$Logic$Entity$remove,
-	$author$project$RPG$Component$Ai$spec,
-	A2(
-		$elm$core$Tuple$pair,
-		5,
-		function (w) {
-			return A3($elm$core$List$foldl, $author$project$RPG$World$spawn, w, $author$project$RPG$World$bodies);
-		}(
-			{
-				action: $author$project$RPG$Component$Action$empty,
-				ai: $author$project$RPG$Component$Ai$empty,
-				anim: $author$project$RPG$Component$Animation$empty,
-				body: $author$project$RPG$Component$Body$empty,
-				equipment: $author$project$RPG$Component$Equipment$empty,
-				grid: A2($author$project$RPG$Component$Grid$empty, 10, 10),
-				id: $author$project$RPG$Component$IdSource$empty(0),
-				mouse: $author$project$RPG$Component$Pointer$empty,
-				p: $author$project$RPG$Component$Position$empty,
-				path: $author$project$RPG$Component$Path$empty,
-				seed: $elm$random$Random$initialSeed(42),
-				ui: $author$project$RPG$Component$Ui$empty,
-				v: $author$project$RPG$Component$Velocity$empty
-			}))).b;
+var $author$project$RPG$World$world = function () {
+	var you = 5;
+	return A2(
+		$justgook$elm_game_logic$Logic$Entity$remove,
+		$author$project$RPG$Component$Ai$spec,
+		A2(
+			$elm$core$Tuple$pair,
+			you,
+			function (w) {
+				return A3($elm$core$List$foldl, $author$project$RPG$World$spawn, w, $author$project$RPG$World$bodies);
+			}(
+				{
+					action: $author$project$RPG$Component$Action$empty,
+					ai: $author$project$RPG$Component$Ai$empty,
+					anim: $author$project$RPG$Component$Animation$empty,
+					body: $author$project$RPG$Component$Body$empty,
+					debug: false,
+					equipment: $author$project$RPG$Component$Equipment$empty,
+					fx: $author$project$RPG$Component$Fx$empty,
+					grid: A2($author$project$RPG$Component$Grid$empty, 10, 10),
+					id: $author$project$RPG$Component$IdSource$empty(0),
+					mouse: $author$project$RPG$Component$Pointer$empty,
+					p: $author$project$RPG$Component$Position$empty,
+					path: $author$project$RPG$Component$Path$empty,
+					seed: $elm$random$Random$initialSeed(42),
+					ui: $author$project$RPG$Component$Ui$empty,
+					v: $author$project$RPG$Component$Velocity$empty,
+					you: you
+				}))).b;
+}();
 var $author$project$Main$initModel = {
 	entities: _List_Nil,
 	screen: A2($author$project$RPG$Util$toScreen, 2, 2),
 	textures: {done: $elm$core$Dict$empty, loading: $elm$core$Set$empty},
 	world: $author$project$RPG$World$world
 };
+var $elm$virtual_dom$VirtualDom$lazy2 = _VirtualDom_lazy2;
+var $elm$html$Html$Lazy$lazy2 = $elm$virtual_dom$VirtualDom$lazy2;
 var $elm$core$Platform$Sub$map = _Platform_map;
-var $elm$virtual_dom$VirtualDom$node = function (tag) {
-	return _VirtualDom_node(
-		_VirtualDom_noScript(tag));
-};
-var $elm$html$Html$node = $elm$virtual_dom$VirtualDom$node;
 var $elm$browser$Browser$AnimationManager$Delta = function (a) {
 	return {$: 'Delta', a: a};
 };
@@ -8152,8 +8180,6 @@ var $author$project$RPG$Subscription$Pointer$subscription = function (model) {
 					A2($elm$json$Json$Decode$field, 'pageY', $elm$json$Json$Decode$float)))
 			]));
 };
-var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 var $elm$core$Platform$Cmd$none = $elm$core$Platform$Cmd$batch(_List_Nil);
 var $elm$core$Dict$getMin = function (dict) {
 	getMin:
@@ -8624,6 +8650,19 @@ var $author$project$RPG$System$getTexture = function (url) {
 		},
 		A2($elm_explorations$webgl$WebGL$Texture$loadWith, $author$project$RPG$System$textureOption, url));
 };
+var $elm$core$Basics$round = _Basics_round;
+var $author$project$RPG$Component$Grid$fromScreen = F2(
+	function (_v0, _v1) {
+		var cellW = _v0.cellW;
+		var cellH = _v0.cellH;
+		var offset = _v0.offset;
+		var x = _v1.x;
+		var y = _v1.y;
+		return {
+			x: $elm$core$Basics$round((x + offset.x) / cellW),
+			y: $elm$core$Basics$round((y + offset.y) / cellH)
+		};
+	});
 var $elm$core$Array$getHelp = F3(
 	function (shift, index, tree) {
 		getHelp:
@@ -8847,21 +8886,9 @@ var $author$project$RPG$System$Ai$step = F6(
 			return acc;
 		}
 	});
-var $elm$core$Basics$round = _Basics_round;
-var $author$project$RPG$Component$Grid$toGrid = F2(
-	function (_v0, _v1) {
-		var config = _v0.config;
-		var offset = _v0.offset;
-		var x = _v1.x;
-		var y = _v1.y;
-		return {
-			x: ($elm$core$Basics$round(x + offset.x) / config.cellW) | 0,
-			y: ($elm$core$Basics$round(y + offset.y) / config.cellH) | 0
-		};
-	});
 var $author$project$RPG$System$Ai$system = F2(
 	function (screen, world) {
-		var toGrid = $author$project$RPG$Component$Grid$toGrid(world.grid);
+		var toGrid = $author$project$RPG$Component$Grid$fromScreen(world.grid);
 		var pathComps = $author$project$RPG$Component$Path$spec.get(world);
 		var aiComps = $author$project$RPG$Component$Ai$spec.get(world);
 		var _v0 = A4(
@@ -8963,6 +8990,161 @@ var $author$project$RPG$System$Animation$system = function (delta) {
 		$author$project$RPG$System$Animation$next(delta),
 		$author$project$RPG$Component$Animation$spec);
 };
+var $author$project$RPG$Component$Grid$fromGrid = F2(
+	function (_v0, _v1) {
+		var cellW = _v0.cellW;
+		var cellH = _v0.cellH;
+		var x = _v1.x;
+		var y = _v1.y;
+		return {x: x * cellW, y: y * cellH};
+	});
+var $author$project$RPG$Component$Fx$spawn = {life: 3000};
+var $author$project$RPG$Component$Fx$spec = A2(
+	$justgook$elm_game_logic$Logic$Component$Spec,
+	function ($) {
+		return $.fx;
+	},
+	F2(
+		function (comps, world) {
+			return _Utils_update(
+				world,
+				{fx: comps});
+		}));
+var $author$project$RPG$System$Fx$spawn = function (p) {
+	return A2(
+		$elm$core$Basics$composeR,
+		$author$project$RPG$Component$IdSource$create,
+		A2(
+			$elm$core$Basics$composeR,
+			$justgook$elm_game_logic$Logic$Entity$with(
+				_Utils_Tuple2($author$project$RPG$Component$Fx$spec, $author$project$RPG$Component$Fx$spawn)),
+			A2(
+				$elm$core$Basics$composeR,
+				$justgook$elm_game_logic$Logic$Entity$with(
+					_Utils_Tuple2(
+						$author$project$RPG$Component$Position$spec,
+						$author$project$RPG$Component$Position$spawn(p))),
+				$elm$core$Tuple$second)));
+};
+var $author$project$RPG$Component$IdSource$remove = F2(
+	function (entityID, world) {
+		var comp = $author$project$RPG$Component$IdSource$get(world);
+		return _Utils_Tuple2(
+			entityID,
+			A2(
+				$author$project$RPG$Component$IdSource$set,
+				_Utils_update(
+					comp,
+					{
+						pool: A2($elm$core$List$cons, entityID, comp.pool)
+					}),
+				world));
+	});
+var $author$project$RPG$System$Fx$remove = function (id) {
+	return A2(
+		$elm$core$Basics$composeR,
+		$author$project$RPG$Component$IdSource$remove(id),
+		A2(
+			$elm$core$Basics$composeR,
+			$justgook$elm_game_logic$Logic$Entity$remove($author$project$RPG$Component$Fx$spec),
+			A2(
+				$elm$core$Basics$composeR,
+				$justgook$elm_game_logic$Logic$Entity$remove($author$project$RPG$Component$Position$spec),
+				$elm$core$Tuple$second)));
+};
+var $author$project$RPG$System$Fx$indexedFoldlArray = F3(
+	function (func, acc, list) {
+		var inner = F2(
+			function (x, _v0) {
+				var i = _v0.a;
+				var thisAcc = _v0.b;
+				return _Utils_Tuple2(
+					i + 1,
+					A3(func, i, x, thisAcc));
+			});
+		return A3(
+			$elm$core$Array$foldl,
+			inner,
+			_Utils_Tuple2(0, acc),
+			list).b;
+	});
+var $author$project$RPG$System$Fx$stepWith = F3(
+	function (f, _v0, world) {
+		var get = _v0.get;
+		var set = _v0.set;
+		return function (_v2) {
+			var comps = _v2.a;
+			var w = _v2.b;
+			return A2(set, comps, w);
+		}(
+			A3(
+				$author$project$RPG$System$Fx$indexedFoldlArray,
+				F3(
+					function (i, c_, acc) {
+						var comps = acc.a;
+						var w = acc.b;
+						if (c_.$ === 'Just') {
+							var c = c_.a;
+							return A2(
+								$elm$core$Tuple$mapFirst,
+								function (cc) {
+									return A3($elm$core$Array$set, i, cc, comps);
+								},
+								A3(f, i, c, w));
+						} else {
+							return acc;
+						}
+					}),
+				_Utils_Tuple2(
+					get(world),
+					world),
+				get(world)));
+	});
+var $author$project$RPG$System$Fx$step = function (delta) {
+	return A2(
+		$author$project$RPG$System$Fx$stepWith,
+		F3(
+			function (i, fx, w) {
+				var life = fx.life - delta;
+				return (life < 0) ? _Utils_Tuple2(
+					$elm$core$Maybe$Nothing,
+					A2($author$project$RPG$System$Fx$remove, i, w)) : _Utils_Tuple2(
+					$elm$core$Maybe$Just(
+						_Utils_update(
+							fx,
+							{life: life})),
+					w);
+			}),
+		$author$project$RPG$Component$Fx$spec);
+};
+var $author$project$RPG$System$Fx$system = F3(
+	function (screen, delta, w) {
+		var mouse = w.mouse;
+		return mouse.down ? A2(
+			$author$project$RPG$System$Fx$spawn,
+			A2(
+				$author$project$RPG$Component$Grid$fromGrid,
+				w.grid,
+				A2($author$project$RPG$Component$Grid$fromScreen, w.grid, mouse.p)),
+			A2($author$project$RPG$System$Fx$step, delta, w)) : A2($author$project$RPG$System$Fx$step, delta, w);
+	});
+var $author$project$RPG$System$Grid$system = F2(
+	function (delta, world) {
+		var grid = world.grid;
+		var _v0 = A2($justgook$elm_game_logic$Logic$Component$get, world.you, world.p);
+		if (_v0.$ === 'Just') {
+			var p = _v0.a;
+			return _Utils_update(
+				world,
+				{
+					grid: _Utils_update(
+						grid,
+						{offset: p})
+				});
+		} else {
+			return world;
+		}
+	});
 var $elm$core$List$head = function (list) {
 	if (list.b) {
 		var x = list.a;
@@ -8999,18 +9181,17 @@ var $author$project$RPG$System$Input$system = F2(
 		var _v0 = A2($justgook$elm_game_logic$Logic$Component$get, id, world.path);
 		if (_v0.$ === 'Just') {
 			var p = _v0.a;
-			return (!_Utils_eq(
-				$elm$core$Maybe$Just(world.mouse.p),
-				$elm$core$List$head(p))) ? A3(
+			var click = A2($author$project$RPG$Component$Grid$fromScreen, world.grid, world.mouse.p);
+			return (world.mouse.down && (!_Utils_eq(
+				$elm$core$Maybe$Just(click),
+				$elm$core$List$head(p)))) ? A3(
 				$elm$core$Basics$apR,
 				A3(
 					$justgook$elm_game_logic$Logic$Component$update,
 					id,
 					function (_v1) {
 						return _List_fromArray(
-							[
-								A2($author$project$RPG$Component$Grid$toGrid, world.grid, world.mouse.p)
-							]);
+							[click]);
 					},
 					world.path),
 				$author$project$RPG$Component$Path$spec.set,
@@ -9119,9 +9300,26 @@ var $author$project$RPG$Component$Util$Direction$fromRecord = function (_v0) {
 	var ax = $elm$core$Basics$abs(x);
 	return (_Utils_cmp(ax, ay) > 0) ? ((x > 0) ? $author$project$RPG$Component$Util$Direction$East : $author$project$RPG$Component$Util$Direction$West) : ((y > 0) ? $author$project$RPG$Component$Util$Direction$North : $author$project$RPG$Component$Util$Direction$South);
 };
+var $justgook$alt_linear_algebra$AltMath$Vector2$scale = F2(
+	function (s, v2) {
+		return {x: s * v2.x, y: s * v2.y};
+	});
+var $author$project$RPG$System$Path$speed = 120;
 var $justgook$alt_linear_algebra$AltMath$Vector2$sub = F2(
 	function (a, b) {
 		return {x: a.x - b.x, y: a.y - b.y};
+	});
+var $author$project$RPG$Component$Grid$toGrid = F2(
+	function (_v0, _v1) {
+		var cellW = _v0.cellW;
+		var cellH = _v0.cellH;
+		var offset = _v0.offset;
+		var x = _v1.x;
+		var y = _v1.y;
+		return {
+			x: $elm$core$Basics$round(x / cellW),
+			y: $elm$core$Basics$round(y / cellH)
+		};
 	});
 var $author$project$RPG$Component$Util$Direction$east = {x: 1, y: 0};
 var $author$project$RPG$Component$Util$Direction$north = {x: 0, y: 1};
@@ -9140,7 +9338,7 @@ var $author$project$RPG$Component$Util$Direction$toRecord = function (dir) {
 	}
 };
 var $author$project$RPG$System$Path$next = F7(
-	function (delta, toGrid, _v0, _v1, _v2, _v3, acc) {
+	function (delta, grid, _v0, _v1, _v2, _v3, acc) {
 		var p = _v0.a;
 		var setP = _v0.b;
 		var path = _v1.a;
@@ -9155,19 +9353,25 @@ var $author$project$RPG$System$Path$next = F7(
 			var distance = A2(
 				$justgook$alt_linear_algebra$AltMath$Vector2$sub,
 				target,
-				toGrid(p));
+				A2($author$project$RPG$Component$Grid$toGrid, grid, p));
 			var dir = $author$project$RPG$Component$Util$Direction$fromRecord(distance);
-			return _Utils_eq(distance, $author$project$RPG$Component$Util$Vec2$zero) ? A2(
-				setAnim,
-				_Utils_update(
-					anim,
-					{pose: $author$project$RPG$Component$Animation$Stand}),
+			return _Utils_eq($author$project$RPG$Component$Util$Vec2$zero, distance) ? A2(
+				setP,
+				A2($author$project$RPG$Component$Grid$fromGrid, grid, target),
 				A2(
-					setV,
-					$author$project$RPG$Component$Util$Vec2$zero,
-					A2(setPath, rest, acc))) : A2(
+					setAnim,
+					_Utils_update(
+						anim,
+						{pose: $author$project$RPG$Component$Animation$Stand}),
+					A2(
+						setV,
+						$author$project$RPG$Component$Util$Vec2$zero,
+						A2(setPath, rest, acc)))) : A2(
 				setV,
-				$author$project$RPG$Component$Util$Direction$toRecord(dir),
+				A2(
+					$justgook$alt_linear_algebra$AltMath$Vector2$scale,
+					($author$project$RPG$System$Path$speed * delta) * 0.001,
+					$author$project$RPG$Component$Util$Direction$toRecord(dir)),
 				A2(
 					setAnim,
 					_Utils_update(
@@ -9320,10 +9524,7 @@ var $author$project$RPG$System$Path$system = F2(
 	function (delta, world) {
 		return A6(
 			$justgook$elm_game_logic$Logic$System$step4,
-			A2(
-				$author$project$RPG$System$Path$next,
-				delta,
-				$author$project$RPG$Component$Grid$toGrid(world.grid)),
+			A2($author$project$RPG$System$Path$next, delta, world.grid),
 			$author$project$RPG$Component$Position$spec,
 			$author$project$RPG$Component$Path$spec,
 			$author$project$RPG$Component$Velocity$spec,
@@ -9730,59 +9931,120 @@ var $justgook$webgl_playground$Playground$move = F3(
 				shape,
 				{x: x + dx, y: y + dy}));
 	});
-var $author$project$RPG$System$Render$character = function (world) {
-	return $justgook$webgl_playground$Playground$group(
-		A5(
-			$justgook$elm_game_logic$Logic$System$foldl3,
-			F3(
-				function (_v0, body, action) {
-					var x = _v0.x;
-					var y = _v0.y;
-					return $elm$core$List$cons(
-						A3(
-							$justgook$webgl_playground$Playground$move,
-							x,
-							y,
-							A2($author$project$RPG$Component$Asset$Body$get, body, action)));
-				}),
-			$author$project$RPG$Component$Position$spec.get(world),
-			$author$project$RPG$Component$Body$spec.get(world),
-			$author$project$RPG$Component$Animation$spec.get(world),
-			_List_Nil));
+var $author$project$RPG$System$Render$px = A2($elm$core$Basics$composeR, $elm$core$Basics$round, $elm$core$Basics$toFloat);
+var $justgook$webgl_playground$Playground$intFromHexChar = function (s) {
+	switch (s.valueOf()) {
+		case '0':
+			return $elm$core$Maybe$Just(0);
+		case '1':
+			return $elm$core$Maybe$Just(1);
+		case '2':
+			return $elm$core$Maybe$Just(2);
+		case '3':
+			return $elm$core$Maybe$Just(3);
+		case '4':
+			return $elm$core$Maybe$Just(4);
+		case '5':
+			return $elm$core$Maybe$Just(5);
+		case '6':
+			return $elm$core$Maybe$Just(6);
+		case '7':
+			return $elm$core$Maybe$Just(7);
+		case '8':
+			return $elm$core$Maybe$Just(8);
+		case '9':
+			return $elm$core$Maybe$Just(9);
+		case 'a':
+			return $elm$core$Maybe$Just(10);
+		case 'b':
+			return $elm$core$Maybe$Just(11);
+		case 'c':
+			return $elm$core$Maybe$Just(12);
+		case 'd':
+			return $elm$core$Maybe$Just(13);
+		case 'e':
+			return $elm$core$Maybe$Just(14);
+		case 'f':
+			return $elm$core$Maybe$Just(15);
+		default:
+			return $elm$core$Maybe$Nothing;
+	}
 };
-var $elm$core$Basics$clamp = F3(
-	function (low, high, number) {
-		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
+var $justgook$webgl_playground$Playground$maybeMap6 = F7(
+	function (func, ma, mb, mc, md, me, mf) {
+		if (ma.$ === 'Nothing') {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var a = ma.a;
+			if (mb.$ === 'Nothing') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var b = mb.a;
+				if (mc.$ === 'Nothing') {
+					return $elm$core$Maybe$Nothing;
+				} else {
+					var c = mc.a;
+					if (md.$ === 'Nothing') {
+						return $elm$core$Maybe$Nothing;
+					} else {
+						var d = md.a;
+						if (me.$ === 'Nothing') {
+							return $elm$core$Maybe$Nothing;
+						} else {
+							var e = me.a;
+							if (mf.$ === 'Nothing') {
+								return $elm$core$Maybe$Nothing;
+							} else {
+								var f = mf.a;
+								return $elm$core$Maybe$Just(
+									A6(func, a, b, c, d, e, f));
+							}
+						}
+					}
+				}
+			}
+		}
 	});
-var $justgook$webgl_playground$Playground$colorClamp = function (n) {
-	return A3(
-		$elm$core$Basics$clamp,
-		0,
-		255,
-		$elm$core$Basics$round(n));
+var $elm$core$String$foldr = _String_foldr;
+var $elm$core$String$toList = function (string) {
+	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
 };
 var $elm_explorations$linear_algebra$Math$Vector3$vec3 = _MJS_v3;
-var $justgook$webgl_playground$Playground$rgb = F3(
-	function (r, g, b) {
-		return A3(
-			$elm_explorations$linear_algebra$Math$Vector3$vec3,
-			$justgook$webgl_playground$Playground$colorClamp(r) / 255,
-			$justgook$webgl_playground$Playground$colorClamp(g) / 255,
-			$justgook$webgl_playground$Playground$colorClamp(b) / 255);
-	});
-var $author$project$RPG$System$Render$Ui$blue = A3($justgook$webgl_playground$Playground$rgb, 89, 125, 206);
-var $author$project$RPG$System$Render$Ui$config = {height: 64, padding: 16};
-var $justgook$webgl_playground$Playground$fade = F2(
-	function (o, _v0) {
-		var shape = _v0.a;
-		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
-			_Utils_update(
-				shape,
-				{o: o}));
-	});
-var $author$project$RPG$System$Render$Ui$green = A3($justgook$webgl_playground$Playground$rgb, 109, 170, 44);
-var $author$project$RPG$System$Render$Ui$blue1 = A3($justgook$webgl_playground$Playground$rgb, 109, 194, 202);
-var $author$project$RPG$System$Render$Ui$green1 = A3($justgook$webgl_playground$Playground$rgb, 218, 212, 94);
+var $justgook$webgl_playground$Playground$hexColor2Vec3 = function (str) {
+	var withoutHash = A2($elm$core$String$startsWith, '#', str) ? A2($elm$core$String$dropLeft, 1, str) : str;
+	var _v0 = $elm$core$String$toList(withoutHash);
+	if ((((((_v0.b && _v0.b.b) && _v0.b.b.b) && _v0.b.b.b.b) && _v0.b.b.b.b.b) && _v0.b.b.b.b.b.b) && (!_v0.b.b.b.b.b.b.b)) {
+		var r1 = _v0.a;
+		var _v1 = _v0.b;
+		var r2 = _v1.a;
+		var _v2 = _v1.b;
+		var g1 = _v2.a;
+		var _v3 = _v2.b;
+		var g2 = _v3.a;
+		var _v4 = _v3.b;
+		var b1 = _v4.a;
+		var _v5 = _v4.b;
+		var b2 = _v5.a;
+		return A7(
+			$justgook$webgl_playground$Playground$maybeMap6,
+			F6(
+				function (a, b, c, d, e, f) {
+					return A3($elm_explorations$linear_algebra$Math$Vector3$vec3, ((a * 16) + b) / 255, ((c * 16) + d) / 255, ((e * 16) + f) / 255);
+				}),
+			$justgook$webgl_playground$Playground$intFromHexChar(r1),
+			$justgook$webgl_playground$Playground$intFromHexChar(r2),
+			$justgook$webgl_playground$Playground$intFromHexChar(g1),
+			$justgook$webgl_playground$Playground$intFromHexChar(g2),
+			$justgook$webgl_playground$Playground$intFromHexChar(b1),
+			$justgook$webgl_playground$Playground$intFromHexChar(b2));
+	} else {
+		return $elm$core$Maybe$Nothing;
+	}
+};
+var $justgook$webgl_playground$Playground$red = A2(
+	$elm$core$Maybe$withDefault,
+	A3($elm_explorations$linear_algebra$Math$Vector3$vec3, 0, 0, 0),
+	$justgook$webgl_playground$Playground$hexColor2Vec3('#cc0000'));
 var $justgook$webgl_playground$Playground$Shader$fragFill = {
 	src: '\n        precision mediump float;\n        uniform vec4 color;\n        void main () {\n            gl_FragColor = color;\n        }\n    ',
 	attributes: {},
@@ -9815,6 +10077,79 @@ var $justgook$webgl_playground$Playground$Render$rect = F4(
 				uT: uT
 			});
 	});
+var $justgook$webgl_playground$Playground$square = F2(
+	function (color, n) {
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			{
+				a: 0,
+				form: A3(
+					$justgook$webgl_shape$WebGL$Shape2d$Form,
+					n,
+					n,
+					$justgook$webgl_playground$Playground$Render$rect(color)),
+				o: 1,
+				sx: 1,
+				sy: 1,
+				x: 0,
+				y: 0
+			});
+	});
+var $author$project$RPG$System$Render$character = function (world) {
+	return $justgook$webgl_playground$Playground$group(
+		A5(
+			$justgook$elm_game_logic$Logic$System$foldl3,
+			F3(
+				function (_v0, body, action) {
+					var x = _v0.x;
+					var y = _v0.y;
+					return $elm$core$List$cons(
+						A3(
+							$justgook$webgl_playground$Playground$move,
+							$author$project$RPG$System$Render$px(x),
+							$author$project$RPG$System$Render$px(y),
+							$justgook$webgl_playground$Playground$group(
+								(world.debug ? $elm$core$List$cons(
+									A2($justgook$webgl_playground$Playground$square, $justgook$webgl_playground$Playground$red, 32)) : $elm$core$Basics$identity)(
+									_List_fromArray(
+										[
+											A2($author$project$RPG$Component$Asset$Body$get, body, action)
+										])))));
+				}),
+			$author$project$RPG$Component$Position$spec.get(world),
+			$author$project$RPG$Component$Body$spec.get(world),
+			$author$project$RPG$Component$Animation$spec.get(world),
+			_List_Nil));
+};
+var $justgook$webgl_playground$Playground$moveX = F2(
+	function (dx, _v0) {
+		var shape = _v0.a;
+		var x = shape.x;
+		var y = shape.y;
+		var a = shape.a;
+		var sx = shape.sx;
+		var sy = shape.sy;
+		var o = shape.o;
+		var form = shape.form;
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			_Utils_update(
+				shape,
+				{x: x + dx}));
+	});
+var $justgook$webgl_playground$Playground$moveY = F2(
+	function (dy, _v0) {
+		var shape = _v0.a;
+		var x = shape.x;
+		var y = shape.y;
+		var a = shape.a;
+		var sx = shape.sx;
+		var sy = shape.sy;
+		var o = shape.o;
+		var form = shape.form;
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			_Utils_update(
+				shape,
+				{y: y + dy}));
+	});
 var $justgook$webgl_playground$Playground$rectangle = F3(
 	function (color, width, height) {
 		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
@@ -9832,6 +10167,104 @@ var $justgook$webgl_playground$Playground$rectangle = F3(
 				y: 0
 			});
 	});
+var $author$project$RPG$System$Render$debugCenter = function (world) {
+	return $justgook$webgl_playground$Playground$group(
+		_List_fromArray(
+			[
+				A3($justgook$webgl_playground$Playground$rectangle, $justgook$webgl_playground$Playground$red, 2, 1000),
+				A3($justgook$webgl_playground$Playground$rectangle, $justgook$webgl_playground$Playground$red, 1000, 2),
+				A2(
+				$justgook$webgl_playground$Playground$moveY,
+				64,
+				A3($justgook$webgl_playground$Playground$rectangle, $justgook$webgl_playground$Playground$red, 100, 2)),
+				A2(
+				$justgook$webgl_playground$Playground$moveY,
+				-64,
+				A3($justgook$webgl_playground$Playground$rectangle, $justgook$webgl_playground$Playground$red, 100, 2)),
+				A2(
+				$justgook$webgl_playground$Playground$moveX,
+				128,
+				A3($justgook$webgl_playground$Playground$rectangle, $justgook$webgl_playground$Playground$red, 2, 100)),
+				A2(
+				$justgook$webgl_playground$Playground$moveX,
+				-128,
+				A3($justgook$webgl_playground$Playground$rectangle, $justgook$webgl_playground$Playground$red, 2, 100))
+			]));
+};
+var $justgook$webgl_playground$Playground$blue = A2(
+	$elm$core$Maybe$withDefault,
+	A3($elm_explorations$linear_algebra$Math$Vector3$vec3, 0, 0, 0),
+	$justgook$webgl_playground$Playground$hexColor2Vec3('#3465a4'));
+var $justgook$elm_game_logic$Logic$System$foldl2 = F4(
+	function (f, comp1, comp2, acc_) {
+		return A3(
+			$justgook$elm_game_logic$Logic$Internal$indexedFoldlArray,
+			F3(
+				function (n, value, acc) {
+					return A2(
+						$elm$core$Maybe$withDefault,
+						acc,
+						A3(
+							$elm$core$Maybe$map2,
+							F2(
+								function (a, b) {
+									return A3(f, a, b, acc);
+								}),
+							value,
+							A2($justgook$elm_game_logic$Logic$Component$get, n, comp2)));
+				}),
+			acc_,
+			comp1);
+	});
+var $author$project$RPG$System$Render$Fx$system = function (world) {
+	return $justgook$webgl_playground$Playground$group(
+		A4(
+			$justgook$elm_game_logic$Logic$System$foldl2,
+			F2(
+				function (fx, p) {
+					return $elm$core$List$cons(
+						A3(
+							$justgook$webgl_playground$Playground$move,
+							p.x,
+							p.y,
+							A2($justgook$webgl_playground$Playground$square, $justgook$webgl_playground$Playground$blue, 32)));
+				}),
+			world.fx,
+			world.p,
+			_List_Nil));
+};
+var $elm$core$Basics$clamp = F3(
+	function (low, high, number) {
+		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
+	});
+var $justgook$webgl_playground$Playground$colorClamp = function (n) {
+	return A3(
+		$elm$core$Basics$clamp,
+		0,
+		255,
+		$elm$core$Basics$round(n));
+};
+var $justgook$webgl_playground$Playground$rgb = F3(
+	function (r, g, b) {
+		return A3(
+			$elm_explorations$linear_algebra$Math$Vector3$vec3,
+			$justgook$webgl_playground$Playground$colorClamp(r) / 255,
+			$justgook$webgl_playground$Playground$colorClamp(g) / 255,
+			$justgook$webgl_playground$Playground$colorClamp(b) / 255);
+	});
+var $author$project$RPG$System$Render$Ui$blue = A3($justgook$webgl_playground$Playground$rgb, 89, 125, 206);
+var $author$project$RPG$System$Render$Ui$config = {height: 64, padding: 16};
+var $justgook$webgl_playground$Playground$fade = F2(
+	function (o, _v0) {
+		var shape = _v0.a;
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			_Utils_update(
+				shape,
+				{o: o}));
+	});
+var $author$project$RPG$System$Render$Ui$green = A3($justgook$webgl_playground$Playground$rgb, 109, 170, 44);
+var $author$project$RPG$System$Render$Ui$blue1 = A3($justgook$webgl_playground$Playground$rgb, 109, 194, 202);
+var $author$project$RPG$System$Render$Ui$green1 = A3($justgook$webgl_playground$Playground$rgb, 218, 212, 94);
 var $author$project$RPG$System$Render$Ui$red = A3($justgook$webgl_playground$Playground$rgb, 208, 70, 72);
 var $author$project$RPG$System$Render$Ui$red1 = A3($justgook$webgl_playground$Playground$rgb, 210, 170, 153);
 var $justgook$webgl_playground$Playground$Shader$vertSprite = {
@@ -9936,17 +10369,17 @@ var $author$project$RPG$System$Render$Ui$health = F3(
 					A3($justgook$webgl_playground$Playground$rectangle, $author$project$RPG$System$Render$Ui$blue1, 50 * m, 2))
 				]));
 	});
-var $author$project$RPG$System$Render$Util$defaultEntitySettings = _List_fromArray(
+var $author$project$WebGL$Ui$Internal$defaultEntitySettings = _List_fromArray(
 	[
 		A2($elm_explorations$webgl$WebGL$Settings$Blend$add, $elm_explorations$webgl$WebGL$Settings$Blend$srcAlpha, $elm_explorations$webgl$WebGL$Settings$Blend$oneMinusSrcAlpha),
 		A4($elm_explorations$webgl$WebGL$Settings$colorMask, true, true, true, false)
 	]);
-var $author$project$RPG$System$Render$Util$fragSprite = {
-	src: '\n        precision mediump float;\n        varying vec2 uv;\n        uniform vec2 uImgSize;\n        uniform sampler2D uImg;\n        uniform float uA;\n        uniform vec4 uUV;\n        uniform vec2 uUV2;\n        void main () {\n            vec2 uv2 = uUV.xy + (fract(uv * uUV2) * uUV.zw );\n            vec2 pixel = (floor(uv2 * uImgSize) + 0.5) / uImgSize;\n            gl_FragColor = texture2D(uImg, pixel);\n            gl_FragColor.a *= uA;\n        }\n    ',
+var $author$project$WebGL$Ui$Slice$fragSprite = {
+	src: '\n        precision mediump float;\n        varying vec2 uv;\n        uniform vec2 uImgSize;\n        uniform sampler2D uImg;\n        uniform float uA;\n        uniform vec4 uUV;\n        uniform vec2 uUV2;\n        void main () {\n            vec2 uv2 = uUV.xy + (fract(uv * uUV2) * uUV.zw);\n            vec2 pixel = (floor(uv2 * uImgSize) + 0.5) / uImgSize;\n            gl_FragColor = texture2D(uImg, pixel);\n            gl_FragColor.a *= uA;\n        }\n    ',
 	attributes: {},
 	uniforms: {uA: 'uA', uImg: 'uImg', uImgSize: 'uImgSize', uUV: 'uUV', uUV2: 'uUV2'}
 };
-var $author$project$RPG$System$Render$Util$mesh = $elm_explorations$webgl$WebGL$triangleStrip(
+var $author$project$WebGL$Ui$Slice$mesh = $elm_explorations$webgl$WebGL$triangleStrip(
 	_List_fromArray(
 		[
 			{
@@ -9962,22 +10395,22 @@ var $author$project$RPG$System$Render$Util$mesh = $elm_explorations$webgl$WebGL$
 			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, 1)
 		}
 		]));
-var $author$project$RPG$System$Render$Util$vertSprite = {
-	src: '\n            precision mediump float;\n            attribute vec2 aP;\n            uniform vec4 uT;\n            uniform vec2 uP;\n            varying vec2 uv;\n            uniform vec4 uUV;\n            uniform vec2 uUV2;\n            vec2 edgeFix = vec2(0.0000001, -0.0000001);\n            void main () {\n//                vec2 aP_ = aP * .5 + 0.5;\n//                uv = uUV.xy + (aP_ * uUV.zw * uUV2) + edgeFix;\n                uv = aP * .5 + 0.5 + edgeFix;\n                gl_Position = vec4(aP * mat2(uT) + uP, 0., 1.0);\n            }\n        ',
+var $author$project$WebGL$Ui$Slice$vertSprite = {
+	src: '\n            precision mediump float;\n            attribute vec2 aP;\n            uniform vec4 uT;\n            uniform vec2 uP;\n            varying vec2 uv;\n            vec2 edgeFix = vec2(0.0000001, -0.0000001);\n            void main () {\n                uv = aP * .5 + 0.5 + edgeFix;\n                gl_Position = vec4(aP * mat2(uT) + uP, 0., 1.0);\n            }\n        ',
 	attributes: {aP: 'aP'},
-	uniforms: {uP: 'uP', uT: 'uT', uUV: 'uUV', uUV2: 'uUV2'}
+	uniforms: {uP: 'uP', uT: 'uT'}
 };
-var $author$project$RPG$System$Render$Util$spriteRender = F7(
-	function (uv2, image_, imageSize, uv, translate, scaleRotateSkew, opacity) {
+var $author$project$WebGL$Ui$Slice$spriteRender = F7(
+	function (uv2, image_, imageSize, uv, uP, uT, opacity) {
 		return A5(
 			$elm_explorations$webgl$WebGL$entityWith,
-			$author$project$RPG$System$Render$Util$defaultEntitySettings,
-			$author$project$RPG$System$Render$Util$vertSprite,
-			$author$project$RPG$System$Render$Util$fragSprite,
-			$author$project$RPG$System$Render$Util$mesh,
-			{uA: opacity, uImg: image_, uImgSize: imageSize, uP: translate, uT: scaleRotateSkew, uUV: uv, uUV2: uv2});
+			$author$project$WebGL$Ui$Internal$defaultEntitySettings,
+			$author$project$WebGL$Ui$Slice$vertSprite,
+			$author$project$WebGL$Ui$Slice$fragSprite,
+			$author$project$WebGL$Ui$Slice$mesh,
+			{uA: opacity, uImg: image_, uImgSize: imageSize, uP: uP, uT: uT, uUV: uv, uUV2: uv2});
 	});
-var $author$project$RPG$System$Render$Util$sprite = F4(
+var $author$project$WebGL$Ui$repeat = F4(
 	function (atlas, _v0, w_, h_) {
 		var xmin = _v0.xmin;
 		var xmax = _v0.xmax;
@@ -10007,7 +10440,7 @@ var $author$project$RPG$System$Render$Util$sprite = F4(
 									w_,
 									h_,
 									A4(
-										$author$project$RPG$System$Render$Util$spriteRender,
+										$author$project$WebGL$Ui$Slice$spriteRender,
 										uv2,
 										t,
 										A2($elm_explorations$linear_algebra$Math$Vector2$vec2, tW, tH),
@@ -10026,7 +10459,7 @@ var $author$project$RPG$System$Render$Util$sprite = F4(
 				y: 0
 			});
 	});
-var $author$project$RPG$System$Render$Ui$spriteRepeat = $author$project$RPG$System$Render$Util$sprite('assets/ui/ui-sheet.png');
+var $author$project$RPG$System$Render$Ui$spriteRepeat = $author$project$WebGL$Ui$repeat('assets/ui/ui-sheet.png');
 var $author$project$RPG$System$Render$Ui$hotkeys = function (w) {
 	return $justgook$webgl_playground$Playground$group(
 		_List_fromArray(
@@ -10050,89 +10483,114 @@ var $author$project$RPG$System$Render$Ui$hotkeys = function (w) {
 					{xmax: 141, xmin: 134, ymax: 19, ymin: 6}))
 			]));
 };
-var $author$project$RPG$System$Render$Ui$bg = A3($justgook$webgl_playground$Playground$rgb, 78, 74, 78);
-var $author$project$RPG$System$Render$Ui$box = F2(
-	function (w, h) {
-		return $justgook$webgl_playground$Playground$group(
+var $author$project$WebGL$Ui$Slice$fragSlice9 = {
+	src: '\n        precision mediump float;\n        varying vec2 uv;\n        varying vec4 center;\n        varying vec2 uv2;\n        varying vec2 doRepeat;\n        varying vec2 repeat;\n        uniform float uA;\n        uniform sampler2D uImg;\n        uniform vec2 uImgSize;\n        void main () {\n        gl_FragColor = vec4(0.,0.,0.,1.);\n        vec2 pixel2 = fract(fract(uv) * repeat);\n\n        if (doRepeat.x < 1.0) {\n            pixel2.x = fract(uv.x);\n        }\n        if (doRepeat.y < 1.0) {\n            pixel2.y = fract(uv.y);\n        }\n\n        vec2 repeatPart = (pixel2 * center.zw + center.xy);\n\n        if (doRepeat.x < 1.0) {\n            repeatPart.x = (uv2.x);\n        }\n        if (doRepeat.y < 1.0) {\n            repeatPart.y = (uv2.y);\n        }\n\n        gl_FragColor = texture2D(uImg, (floor(repeatPart) + 0.5) / uImgSize );\n\n        }\n    ',
+	attributes: {},
+	uniforms: {uA: 'uA', uImg: 'uImg', uImgSize: 'uImgSize'}
+};
+var $author$project$WebGL$Ui$Slice$mesh9 = function () {
+	var v9 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, -1);
+	var v8 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -3, -1);
+	var v7 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 3, 1);
+	var v6 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, 1);
+	var v5 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, 1);
+	var v4 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -3, 1);
+	var v3 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 3, 3);
+	var v2 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, 3);
+	var v15 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 3, -3);
+	var v14 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, -3);
+	var v13 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, -3);
+	var v12 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -3, -3);
+	var v11 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 3, -1);
+	var v10 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, -1);
+	var v1 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, 3);
+	var v0 = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -3, 3);
+	return $elm_explorations$webgl$WebGL$triangleStrip(
+		A2(
+			$elm$core$List$map,
+			function (i) {
+				return {aP: i};
+			},
 			_List_fromArray(
-				[
-					A3($justgook$webgl_playground$Playground$rectangle, $author$project$RPG$System$Render$Ui$bg, w + 1, h + 1),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					0.5,
-					(h * 0.5) + 3.5,
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 68, xmin: 12, ymax: 40, ymin: 34},
-						w + 1,
-						7)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					(w * 0.5) + 4.5,
-					0.5,
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 78, xmin: 70, ymax: 64, ymin: 42},
-						9,
-						h + 1.5)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					0.5,
-					-((h * 0.5) + 3.5),
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 68, xmin: 12, ymax: 72, ymin: 66},
-						w + 1,
-						7)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					((-w) * 0.5) - 5,
-					0.5,
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 10, xmin: 1, ymax: 64, ymin: 42},
-						10,
-						h + 1.5)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					((-w) * 0.5) - 5,
-					(h * 0.5) + 3.5,
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 10, xmin: 1, ymax: 40, ymin: 34},
-						10,
-						7)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					(w * 0.5) + 4.5,
-					(h * 0.5) + 3.5,
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 78, xmin: 70, ymax: 40, ymin: 34},
-						9,
-						7)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					(w * 0.5) + 4.5,
-					-((h * 0.5) + 3.5),
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 78, xmin: 70, ymax: 72, ymin: 66},
-						9,
-						7)),
-					A3(
-					$justgook$webgl_playground$Playground$move,
-					((-w) * 0.5) - 5,
-					-((h * 0.5) + 3.5),
-					A3(
-						$author$project$RPG$System$Render$Ui$spriteRepeat,
-						{xmax: 10, xmin: 1, ymax: 72, ymin: 66},
-						10,
-						7))
-				]));
+				[v0, v4, v1, v5, v2, v6, v3, v7, v11, v6, v10, v5, v9, v4, v8, v12, v9, v13, v10, v14, v11, v15])));
+}();
+var $author$project$WebGL$Ui$Slice$vertSlice9 = {
+	src: '\nprecision mediump float;\nattribute vec2 aP;\nuniform vec4 uT;\nuniform vec2 uP;\nuniform vec2 uSize;\nuniform vec2 uImgSize;\nuniform vec4 uSlice;\nuniform vec4 uBounds;\nvarying vec2 uv;\nvarying vec2 uv2;\nvarying vec4 center;\nvarying vec2 doRepeat;\nvarying vec2 repeat;\nvec2 edgeFix = vec2(0.0000001, -0.0000001);\nvoid main () {\n    doRepeat = vec2(0.0,0.0);\n    center = vec4(\n        uBounds.x + uSlice.x,\n        uImgSize.y - (uBounds.y + uSlice.y + uSlice.w),\n        uSlice.z,\n        uSlice.w\n    );\n    repeat = vec2((uSize.x - (uBounds.z - uSlice.z)) / uSlice.z, (uSize.y - (uBounds.w - uSlice.w)) / uSlice.w);\n    vec2 p = aP;\n    uv2 = vec2(0.0, 0.0);\n\n    if (aP.x == -1.0) {\n        p.x = -1.0 + (uSlice.x / uSize.x * 2.0);\n        uv.x = 1.0;\n        doRepeat.x = 1.0;\n        uv2.x = (uBounds.x + uSlice.x);\n    }\n    if (aP.x == 1.0) {\n        p.x = 1.0 - (uBounds.z - uSlice.x - uSlice.z) / uSize.x * 2.0;\n        uv.x = 2.0;\n        doRepeat.x = 1.0;\n        uv2.x = (uBounds.x + uSlice.x + uSlice.z);\n    }\n    if (aP.y == 1.0) {\n        p.y = 1.0 - (uSlice.y / uSize.y * 2.0);\n        uv.y = 2.0;\n        doRepeat.y = 1.0;\n        uv2.y = uImgSize.y - (uBounds.y + uSlice.y);\n    }\n    if (aP.y == -1.0) {\n        p.y = -1.0 + (uBounds.w - uSlice.y - uSlice.w) / uSize.y * 2.0;\n        uv.y = 1.0;\n        doRepeat.y = 1.0;\n        uv2.y = uImgSize.y - (uBounds.y + uSlice.y + uSlice.w);\n    }\n    if (aP.x == -3.0) {\n        p.x = -1.0;\n        uv.x = 0.0;\n        uv2.x = uBounds.x;\n    }\n    if (aP.x == 3.0) {\n        p.x = 1.0;\n        uv.x = 3.0;\n        uv2.x = (uBounds.x + uBounds.z);\n    }\n    if (aP.y == 3.0) {\n        p.y = 1.0;\n        uv.y = 3.0;\n        uv2.y = uImgSize.y - uBounds.y;\n    }\n    if (aP.y == -3.0) {\n        p.y = -1.0;\n        uv.y = 0.0;\n        uv2.y = uImgSize.y - (uBounds.y + uBounds.w);\n    }\n\n    uv += edgeFix;\n    uv2 += edgeFix;\n\n    gl_Position = vec4(p * mat2(uT) + uP, 0., 1.0);\n\n}\n        ',
+	attributes: {aP: 'aP'},
+	uniforms: {uBounds: 'uBounds', uImgSize: 'uImgSize', uP: 'uP', uSize: 'uSize', uSlice: 'uSlice', uT: 'uT'}
+};
+var $author$project$WebGL$Ui$Slice$slice9Render = F8(
+	function (img, imageSize, uSize, uBounds, uSlice, uP, uT, opacity) {
+		return A5(
+			$elm_explorations$webgl$WebGL$entityWith,
+			$author$project$WebGL$Ui$Internal$defaultEntitySettings,
+			$author$project$WebGL$Ui$Slice$vertSlice9,
+			$author$project$WebGL$Ui$Slice$fragSlice9,
+			$author$project$WebGL$Ui$Slice$mesh9,
+			{uA: opacity, uBounds: uBounds, uImg: img, uImgSize: imageSize, uP: uP, uSize: uSize, uSlice: uSlice, uT: uT});
 	});
-var $justgook$webgl_playground$Playground$moveY = F2(
-	function (dy, _v0) {
+var $author$project$WebGL$Ui$Slice$slice9 = F4(
+	function (atlas, _v0, w, h) {
+		var bounds = _v0.bounds;
+		var slice = _v0.slice;
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			{
+				a: 0,
+				form: A2(
+					$justgook$webgl_shape$WebGL$Shape2d$Textured,
+					atlas,
+					function (texture) {
+						var _v1 = $elm_explorations$webgl$WebGL$Texture$size(texture);
+						var tW_ = _v1.a;
+						var tH_ = _v1.b;
+						var th = tH_;
+						var tw = tW_;
+						return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+							{
+								a: 0,
+								form: A3(
+									$justgook$webgl_shape$WebGL$Shape2d$Form,
+									w,
+									h,
+									A5(
+										$author$project$WebGL$Ui$Slice$slice9Render,
+										texture,
+										A2($elm_explorations$linear_algebra$Math$Vector2$vec2, tw, th),
+										A2($elm_explorations$linear_algebra$Math$Vector2$vec2, w, h),
+										A4($elm_explorations$linear_algebra$Math$Vector4$vec4, bounds.x, bounds.y, bounds.w, bounds.h),
+										A4($elm_explorations$linear_algebra$Math$Vector4$vec4, slice.x, slice.y, slice.w, slice.h))),
+								o: 1,
+								sx: 1,
+								sy: 1,
+								x: 0,
+								y: 0
+							});
+					}),
+				o: 1,
+				sx: 1,
+				sy: 1,
+				x: 0,
+				y: 0
+			});
+	});
+var $author$project$WebGL$Ui$slice9 = $author$project$WebGL$Ui$Slice$slice9;
+var $author$project$RPG$System$Render$Ui$border = A2(
+	$author$project$WebGL$Ui$slice9,
+	'assets/ui/ui-sheet.png',
+	{
+		bounds: {h: 39, w: 67, x: 1, y: 34},
+		slice: {h: 24, w: 50, x: 9, y: 9}
+	});
+var $author$project$RPG$System$Render$Ui$border2 = A2(
+	$author$project$WebGL$Ui$slice9,
+	'assets/ui/ui-sheet.png',
+	{
+		bounds: {h: 8, w: 8, x: 69, y: 34},
+		slice: {h: 1, w: 1, x: 4, y: 4}
+	});
+var $elm$core$Basics$modBy = _Basics_modBy;
+var $justgook$webgl_playground$Playground$scale = F2(
+	function (ns, _v0) {
 		var shape = _v0.a;
 		var x = shape.x;
 		var y = shape.y;
@@ -10144,116 +10602,8 @@ var $justgook$webgl_playground$Playground$moveY = F2(
 		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
 			_Utils_update(
 				shape,
-				{y: y + dy}));
+				{sx: sx * ns, sy: sy * ns}));
 	});
-var $justgook$webgl_playground$Playground$intFromHexChar = function (s) {
-	switch (s.valueOf()) {
-		case '0':
-			return $elm$core$Maybe$Just(0);
-		case '1':
-			return $elm$core$Maybe$Just(1);
-		case '2':
-			return $elm$core$Maybe$Just(2);
-		case '3':
-			return $elm$core$Maybe$Just(3);
-		case '4':
-			return $elm$core$Maybe$Just(4);
-		case '5':
-			return $elm$core$Maybe$Just(5);
-		case '6':
-			return $elm$core$Maybe$Just(6);
-		case '7':
-			return $elm$core$Maybe$Just(7);
-		case '8':
-			return $elm$core$Maybe$Just(8);
-		case '9':
-			return $elm$core$Maybe$Just(9);
-		case 'a':
-			return $elm$core$Maybe$Just(10);
-		case 'b':
-			return $elm$core$Maybe$Just(11);
-		case 'c':
-			return $elm$core$Maybe$Just(12);
-		case 'd':
-			return $elm$core$Maybe$Just(13);
-		case 'e':
-			return $elm$core$Maybe$Just(14);
-		case 'f':
-			return $elm$core$Maybe$Just(15);
-		default:
-			return $elm$core$Maybe$Nothing;
-	}
-};
-var $justgook$webgl_playground$Playground$maybeMap6 = F7(
-	function (func, ma, mb, mc, md, me, mf) {
-		if (ma.$ === 'Nothing') {
-			return $elm$core$Maybe$Nothing;
-		} else {
-			var a = ma.a;
-			if (mb.$ === 'Nothing') {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var b = mb.a;
-				if (mc.$ === 'Nothing') {
-					return $elm$core$Maybe$Nothing;
-				} else {
-					var c = mc.a;
-					if (md.$ === 'Nothing') {
-						return $elm$core$Maybe$Nothing;
-					} else {
-						var d = md.a;
-						if (me.$ === 'Nothing') {
-							return $elm$core$Maybe$Nothing;
-						} else {
-							var e = me.a;
-							if (mf.$ === 'Nothing') {
-								return $elm$core$Maybe$Nothing;
-							} else {
-								var f = mf.a;
-								return $elm$core$Maybe$Just(
-									A6(func, a, b, c, d, e, f));
-							}
-						}
-					}
-				}
-			}
-		}
-	});
-var $elm$core$String$foldr = _String_foldr;
-var $elm$core$String$toList = function (string) {
-	return A3($elm$core$String$foldr, $elm$core$List$cons, _List_Nil, string);
-};
-var $justgook$webgl_playground$Playground$hexColor2Vec3 = function (str) {
-	var withoutHash = A2($elm$core$String$startsWith, '#', str) ? A2($elm$core$String$dropLeft, 1, str) : str;
-	var _v0 = $elm$core$String$toList(withoutHash);
-	if ((((((_v0.b && _v0.b.b) && _v0.b.b.b) && _v0.b.b.b.b) && _v0.b.b.b.b.b) && _v0.b.b.b.b.b.b) && (!_v0.b.b.b.b.b.b.b)) {
-		var r1 = _v0.a;
-		var _v1 = _v0.b;
-		var r2 = _v1.a;
-		var _v2 = _v1.b;
-		var g1 = _v2.a;
-		var _v3 = _v2.b;
-		var g2 = _v3.a;
-		var _v4 = _v3.b;
-		var b1 = _v4.a;
-		var _v5 = _v4.b;
-		var b2 = _v5.a;
-		return A7(
-			$justgook$webgl_playground$Playground$maybeMap6,
-			F6(
-				function (a, b, c, d, e, f) {
-					return A3($elm_explorations$linear_algebra$Math$Vector3$vec3, ((a * 16) + b) / 255, ((c * 16) + d) / 255, ((e * 16) + f) / 255);
-				}),
-			$justgook$webgl_playground$Playground$intFromHexChar(r1),
-			$justgook$webgl_playground$Playground$intFromHexChar(r2),
-			$justgook$webgl_playground$Playground$intFromHexChar(g1),
-			$justgook$webgl_playground$Playground$intFromHexChar(g2),
-			$justgook$webgl_playground$Playground$intFromHexChar(b1),
-			$justgook$webgl_playground$Playground$intFromHexChar(b2));
-	} else {
-		return $elm$core$Maybe$Nothing;
-	}
-};
 var $justgook$webgl_playground$Playground$white = A2(
 	$elm$core$Maybe$withDefault,
 	A3($elm_explorations$linear_algebra$Math$Vector3$vec3, 0, 0, 0),
@@ -10751,59 +11101,37 @@ var $justgook$webgl_playground$Playground$Font$SimpleMood$letters = function (c)
 };
 var $justgook$webgl_playground$Playground$wordsConfig = {charH: 16, charW: 16, getIndex: $justgook$webgl_playground$Playground$Font$SimpleMood$letters, src: $justgook$webgl_playground$Playground$Font$SimpleMood$image};
 var $justgook$webgl_playground$Playground$words = $justgook$webgl_playground$Playground$Extra$Font$tileFont($justgook$webgl_playground$Playground$wordsConfig);
-var $author$project$RPG$System$Render$Ui$inventory = $justgook$webgl_playground$Playground$group(
-	_List_fromArray(
-		[
-			A3(
-			$justgook$webgl_playground$Playground$move,
-			25,
-			100,
-			A2($author$project$RPG$System$Render$Ui$box, 100, 100)),
+var $author$project$RPG$System$Render$Ui$inventory = function () {
+	var cell = A2($author$project$RPG$System$Render$Ui$border2, 16, 16);
+	return $justgook$webgl_playground$Playground$group(
+		A2(
+			$elm$core$List$cons,
 			A2(
-			$justgook$webgl_playground$Playground$moveY,
-			190,
-			$justgook$webgl_playground$Playground$group(
-				_List_fromArray(
-					[
-						A2($author$project$RPG$System$Render$Ui$box, 150, 30),
-						A2($justgook$webgl_playground$Playground$words, $justgook$webgl_playground$Playground$white, 'INVENTORY')
-					]))),
-			A3(
-			$justgook$webgl_playground$Playground$move,
-			-65,
-			100,
-			A2($author$project$RPG$System$Render$Ui$box, 20, 100))
-		]));
-var $justgook$webgl_playground$Playground$moveX = F2(
-	function (dx, _v0) {
-		var shape = _v0.a;
-		var x = shape.x;
-		var y = shape.y;
-		var a = shape.a;
-		var sx = shape.sx;
-		var sy = shape.sy;
-		var o = shape.o;
-		var form = shape.form;
-		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
-			_Utils_update(
-				shape,
-				{x: x + dx}));
-	});
-var $justgook$webgl_playground$Playground$scale = F2(
-	function (ns, _v0) {
-		var shape = _v0.a;
-		var x = shape.x;
-		var y = shape.y;
-		var a = shape.a;
-		var sx = shape.sx;
-		var sy = shape.sy;
-		var o = shape.o;
-		var form = shape.form;
-		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
-			_Utils_update(
-				shape,
-				{sx: sx * ns, sy: sy * ns}));
-	});
+				$justgook$webgl_playground$Playground$moveY,
+				67,
+				$justgook$webgl_playground$Playground$group(
+					_List_fromArray(
+						[
+							A2($author$project$RPG$System$Render$Ui$border, 102, 30),
+							A2(
+							$justgook$webgl_playground$Playground$scale,
+							0.5,
+							A2($justgook$webgl_playground$Playground$words, $justgook$webgl_playground$Playground$white, 'INVENTORY'))
+						]))),
+			A2(
+				$elm$core$List$cons,
+				A2($author$project$RPG$System$Render$Ui$border, 102, 102),
+				A2(
+					$elm$core$List$map,
+					function (i) {
+						return A3(
+							$justgook$webgl_playground$Playground$move,
+							(A2($elm$core$Basics$modBy, 5, i) * 17) - 34,
+							17 * $elm$core$Basics$floor(i / 5),
+							cell);
+					},
+					A2($elm$core$List$range, 0, 14)))));
+}();
 var $justgook$webgl_playground$Playground$yellow = A2(
 	$elm$core$Maybe$withDefault,
 	A3($elm_explorations$linear_algebra$Math$Vector3$vec3, 0, 0, 0),
@@ -10812,11 +11140,17 @@ var $author$project$RPG$System$Render$Ui$system = F2(
 	function (_v0, _v1) {
 		var bottom = _v0.bottom;
 		var left = _v0.left;
+		var right = _v0.right;
 		var top = _v0.top;
 		var width = _v0.width;
 		var ui = _v1.ui;
 		return $justgook$webgl_playground$Playground$group(
-			(ui.inventory ? $elm$core$List$cons($author$project$RPG$System$Render$Ui$inventory) : $elm$core$Basics$identity)(
+			(ui.inventory ? $elm$core$List$cons(
+				A3(
+					$justgook$webgl_playground$Playground$move,
+					right - 110,
+					top - 175,
+					A2($justgook$webgl_playground$Playground$scale, 2, $author$project$RPG$System$Render$Ui$inventory))) : $elm$core$Basics$identity)(
 				_List_fromArray(
 					[
 						A3(
@@ -11037,11 +11371,22 @@ var $author$project$RPG$System$Render$system = function (_v0) {
 		$justgook$webgl_shape$WebGL$Shape2d$toEntities,
 		textures.done,
 		{height: screen.height, width: screen.width},
-		_List_fromArray(
-			[
-				$author$project$RPG$System$Render$character(world),
-				A2($author$project$RPG$System$Render$Ui$system, screen, world)
-			]));
+		(world.debug ? $elm$core$List$cons(
+			$author$project$RPG$System$Render$debugCenter(world)) : $elm$core$Basics$identity)(
+			_List_fromArray(
+				[
+					A3(
+					$justgook$webgl_playground$Playground$move,
+					-world.grid.offset.x,
+					-world.grid.offset.y,
+					$justgook$webgl_playground$Playground$group(
+						_List_fromArray(
+							[
+								$author$project$RPG$System$Render$character(world),
+								$author$project$RPG$System$Render$Fx$system(world)
+							]))),
+					A2($author$project$RPG$System$Render$Ui$system, screen, world)
+				])));
 };
 var $elm$core$Set$union = F2(
 	function (_v0, _v1) {
@@ -11054,16 +11399,23 @@ var $author$project$RPG$System$system = F2(
 	function (delta, model) {
 		var textures = model.textures;
 		var world = A2(
-			$author$project$RPG$System$Ai$system,
-			model.screen,
-			A2(
-				$author$project$RPG$System$Animation$system,
+			$author$project$RPG$System$Grid$system,
+			delta,
+			A3(
+				$author$project$RPG$System$Fx$system,
+				model.screen,
 				delta,
-				$author$project$RPG$System$Movement$system(
+				A2(
+					$author$project$RPG$System$Ai$system,
+					model.screen,
 					A2(
-						$author$project$RPG$System$Input$system,
-						5,
-						A2($author$project$RPG$System$Path$system, delta, model.world)))));
+						$author$project$RPG$System$Animation$system,
+						delta,
+						$author$project$RPG$System$Movement$system(
+							A2(
+								$author$project$RPG$System$Input$system,
+								5,
+								A2($author$project$RPG$System$Path$system, delta, model.world)))))));
 		var _v0 = $author$project$RPG$System$Render$system(
 			_Utils_update(
 				model,
@@ -11241,18 +11593,12 @@ var $author$project$Main$main = $elm$browser$Browser$document(
 		update: $author$project$Main$update,
 		view: function (m) {
 			return {
-				body: _List_fromArray(
-					[
-						A3(
-						$elm$html$Html$node,
-						'style',
-						_List_Nil,
-						_List_fromArray(
-							[
-								$elm$html$Html$text('html,body{cursor:url(' + (m.world.ui.cursor + '), auto;margin:0;padding:0;overflow:hidden;}canvas{display:block}'))
-							])),
-						$author$project$Main$view(m)
-					]),
+				body: (m.world.debug ? $elm$core$List$cons(
+					A3($elm$html$Html$Lazy$lazy2, $author$project$Main$css, m.world.ui.cursor, m.world.grid)) : $elm$core$Basics$identity)(
+					_List_fromArray(
+						[
+							$author$project$Main$view(m)
+						])),
 				title: 'RPG'
 			};
 		}

@@ -7045,6 +7045,7 @@ var $author$project$RPG$Component$Grid$empty = F2(
 var $author$project$RPG$Component$IdSource$empty = function (next) {
 	return {next: next, pool: _List_Nil};
 };
+var $author$project$RPG$Component$Name$empty = $justgook$elm_game_logic$Logic$Component$empty;
 var $author$project$RPG$Component$Path$empty = $justgook$elm_game_logic$Logic$Component$empty;
 var $author$project$RPG$Component$Util$Vec2$zero = A2($justgook$alt_linear_algebra$AltMath$Vector2$Vec2, 0, 0);
 var $author$project$RPG$Component$Pointer$empty = {down: false, p: $author$project$RPG$Component$Util$Vec2$zero};
@@ -7195,6 +7196,315 @@ var $author$project$RPG$Component$Ai$spawn = _Utils_Tuple0;
 var $author$project$RPG$Component$Util$Direction$South = {$: 'South'};
 var $author$project$RPG$Component$Animation$Walk = {$: 'Walk'};
 var $author$project$RPG$Component$Animation$spawn = {dir: $author$project$RPG$Component$Util$Direction$South, frame: 0, pose: $author$project$RPG$Component$Animation$Walk, speed: 0.01, time: 0};
+var $author$project$RPG$Component$Name$finals = _List_fromArray(
+	['b', 'd', 'f', 'g', 'ge', 'dge', 'ck', 'x', 'ks', 'cks', 'l', 'm', 'mb', 'n', 'p', 'r', 's', 'se', 'ce', 't', 'v', 've', 'w', 'we', 'y', 'z', 'th', 'the', 'ch', 'tch', 'sh', 'sch', 'ng']);
+var $elm$random$Random$Generator = function (a) {
+	return {$: 'Generator', a: a};
+};
+var $elm$random$Random$andThen = F2(
+	function (callback, _v0) {
+		var genA = _v0.a;
+		return $elm$random$Random$Generator(
+			function (seed) {
+				var _v1 = genA(seed);
+				var result = _v1.a;
+				var newSeed = _v1.b;
+				var _v2 = callback(result);
+				var genB = _v2.a;
+				return genB(newSeed);
+			});
+	});
+var $author$project$RPG$Component$Name$foldl2 = F3(
+	function (acc, a, b) {
+		foldl2:
+		while (true) {
+			var _v0 = _Utils_Tuple2(a, b);
+			_v0$2:
+			while (true) {
+				if (_v0.a.b) {
+					if (!_v0.a.b.b) {
+						var _v1 = _v0.a;
+						var a1 = _v1.a;
+						return _Utils_ap(acc, a1);
+					} else {
+						if (_v0.b.b) {
+							var _v2 = _v0.a;
+							var a1 = _v2.a;
+							var rest1 = _v2.b;
+							var _v3 = _v0.b;
+							var b1 = _v3.a;
+							var rest2 = _v3.b;
+							var $temp$acc = _Utils_ap(
+								acc,
+								_Utils_ap(a1, b1)),
+								$temp$a = rest1,
+								$temp$b = rest2;
+							acc = $temp$acc;
+							a = $temp$a;
+							b = $temp$b;
+							continue foldl2;
+						} else {
+							break _v0$2;
+						}
+					}
+				} else {
+					break _v0$2;
+				}
+			}
+			return acc;
+		}
+	});
+var $author$project$RPG$Component$Name$initials = _List_fromArray(
+	['b', 'bl', 'br', 'bh', 'd', 'dr', 'f', 'fr', 'fl', 'ph', 'g', 'gr', 'gl', 'gh', 'h', 'j', 'c', 'k', 'ch', 'cl', 'cr', 'chr', 'l', 'm', 'n', 'kn', 'gn', 'p', 'pr', 'pl', 'r', 'wr', 's', 'ps', 'sc', 'sch', 't', 'pt', 'v', 'w', 'wh', 'y', 'z', 'th', 'ch', 'sh', 'qu']);
+var $elm$core$Bitwise$xor = _Bitwise_xor;
+var $elm$random$Random$peel = function (_v0) {
+	var state = _v0.a;
+	var word = (state ^ (state >>> ((state >>> 28) + 4))) * 277803737;
+	return ((word >>> 22) ^ word) >>> 0;
+};
+var $elm$random$Random$int = F2(
+	function (a, b) {
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v0 = (_Utils_cmp(a, b) < 0) ? _Utils_Tuple2(a, b) : _Utils_Tuple2(b, a);
+				var lo = _v0.a;
+				var hi = _v0.b;
+				var range = (hi - lo) + 1;
+				if (!((range - 1) & range)) {
+					return _Utils_Tuple2(
+						(((range - 1) & $elm$random$Random$peel(seed0)) >>> 0) + lo,
+						$elm$random$Random$next(seed0));
+				} else {
+					var threshhold = (((-range) >>> 0) % range) >>> 0;
+					var accountForBias = function (seed) {
+						accountForBias:
+						while (true) {
+							var x = $elm$random$Random$peel(seed);
+							var seedN = $elm$random$Random$next(seed);
+							if (_Utils_cmp(x, threshhold) < 0) {
+								var $temp$seed = seedN;
+								seed = $temp$seed;
+								continue accountForBias;
+							} else {
+								return _Utils_Tuple2((x % range) + lo, seedN);
+							}
+						}
+					};
+					return accountForBias(seed0);
+				}
+			});
+	});
+var $elm$random$Random$listHelp = F4(
+	function (revList, n, gen, seed) {
+		listHelp:
+		while (true) {
+			if (n < 1) {
+				return _Utils_Tuple2(revList, seed);
+			} else {
+				var _v0 = gen(seed);
+				var value = _v0.a;
+				var newSeed = _v0.b;
+				var $temp$revList = A2($elm$core$List$cons, value, revList),
+					$temp$n = n - 1,
+					$temp$gen = gen,
+					$temp$seed = newSeed;
+				revList = $temp$revList;
+				n = $temp$n;
+				gen = $temp$gen;
+				seed = $temp$seed;
+				continue listHelp;
+			}
+		}
+	});
+var $elm$random$Random$list = F2(
+	function (n, _v0) {
+		var gen = _v0.a;
+		return $elm$random$Random$Generator(
+			function (seed) {
+				return A4($elm$random$Random$listHelp, _List_Nil, n, gen, seed);
+			});
+	});
+var $elm$random$Random$map2 = F3(
+	function (func, _v0, _v1) {
+		var genA = _v0.a;
+		var genB = _v1.a;
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v2 = genA(seed0);
+				var a = _v2.a;
+				var seed1 = _v2.b;
+				var _v3 = genB(seed1);
+				var b = _v3.a;
+				var seed2 = _v3.b;
+				return _Utils_Tuple2(
+					A2(func, a, b),
+					seed2);
+			});
+	});
+var $author$project$RPG$Component$Name$nucleii = _List_fromArray(
+	['a', 'e', 'i', 'o', 'u', 'ae', 'ee', 'ie', 'oe', 'ue', 'oo', 'au', 'oi', 'ai', 'ea', 'y', 'ye', 'ou', 'oy', 'ey', 'uy', 'ay']);
+var $elm$random$Random$addOne = function (value) {
+	return _Utils_Tuple2(1, value);
+};
+var $elm$core$Basics$abs = function (n) {
+	return (n < 0) ? (-n) : n;
+};
+var $elm$random$Random$float = F2(
+	function (a, b) {
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var seed1 = $elm$random$Random$next(seed0);
+				var range = $elm$core$Basics$abs(b - a);
+				var n1 = $elm$random$Random$peel(seed1);
+				var n0 = $elm$random$Random$peel(seed0);
+				var lo = (134217727 & n1) * 1.0;
+				var hi = (67108863 & n0) * 1.0;
+				var val = ((hi * 134217728.0) + lo) / 9007199254740992.0;
+				var scaled = (val * range) + a;
+				return _Utils_Tuple2(
+					scaled,
+					$elm$random$Random$next(seed1));
+			});
+	});
+var $elm$random$Random$getByWeight = F3(
+	function (_v0, others, countdown) {
+		getByWeight:
+		while (true) {
+			var weight = _v0.a;
+			var value = _v0.b;
+			if (!others.b) {
+				return value;
+			} else {
+				var second = others.a;
+				var otherOthers = others.b;
+				if (_Utils_cmp(
+					countdown,
+					$elm$core$Basics$abs(weight)) < 1) {
+					return value;
+				} else {
+					var $temp$_v0 = second,
+						$temp$others = otherOthers,
+						$temp$countdown = countdown - $elm$core$Basics$abs(weight);
+					_v0 = $temp$_v0;
+					others = $temp$others;
+					countdown = $temp$countdown;
+					continue getByWeight;
+				}
+			}
+		}
+	});
+var $elm$random$Random$map = F2(
+	function (func, _v0) {
+		var genA = _v0.a;
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v1 = genA(seed0);
+				var a = _v1.a;
+				var seed1 = _v1.b;
+				return _Utils_Tuple2(
+					func(a),
+					seed1);
+			});
+	});
+var $elm$core$List$sum = function (numbers) {
+	return A3($elm$core$List$foldl, $elm$core$Basics$add, 0, numbers);
+};
+var $elm$random$Random$weighted = F2(
+	function (first, others) {
+		var normalize = function (_v0) {
+			var weight = _v0.a;
+			return $elm$core$Basics$abs(weight);
+		};
+		var total = normalize(first) + $elm$core$List$sum(
+			A2($elm$core$List$map, normalize, others));
+		return A2(
+			$elm$random$Random$map,
+			A2($elm$random$Random$getByWeight, first, others),
+			A2($elm$random$Random$float, 0, total));
+	});
+var $elm$random$Random$uniform = F2(
+	function (value, valueList) {
+		return A2(
+			$elm$random$Random$weighted,
+			$elm$random$Random$addOne(value),
+			A2($elm$core$List$map, $elm$random$Random$addOne, valueList));
+	});
+var $author$project$RPG$Component$Name$gen3 = function (aa) {
+	return A2(
+		$elm$random$Random$andThen,
+		function (a) {
+			return A3(
+				$elm$random$Random$map2,
+				$author$project$RPG$Component$Name$foldl2(''),
+				A2(
+					$elm$random$Random$list,
+					a,
+					A2($elm$random$Random$uniform, 'a', $author$project$RPG$Component$Name$nucleii)),
+				A2(
+					$elm$random$Random$list,
+					a,
+					A2($elm$random$Random$uniform, 'a', $author$project$RPG$Component$Name$initials)));
+		},
+		A2($elm$random$Random$int, 1, aa));
+};
+var $elm$random$Random$map3 = F4(
+	function (func, _v0, _v1, _v2) {
+		var genA = _v0.a;
+		var genB = _v1.a;
+		var genC = _v2.a;
+		return $elm$random$Random$Generator(
+			function (seed0) {
+				var _v3 = genA(seed0);
+				var a = _v3.a;
+				var seed1 = _v3.b;
+				var _v4 = genB(seed1);
+				var b = _v4.a;
+				var seed2 = _v4.b;
+				var _v5 = genC(seed2);
+				var c = _v5.a;
+				var seed3 = _v5.b;
+				return _Utils_Tuple2(
+					A3(func, a, b, c),
+					seed3);
+			});
+	});
+var $elm$core$String$toUpper = _String_toUpper;
+var $author$project$RPG$Component$Name$up = function (str) {
+	return _Utils_ap(
+		$elm$core$String$toUpper(
+			A2($elm$core$String$left, 1, str)),
+		A2($elm$core$String$dropLeft, 1, str));
+};
+var $author$project$RPG$Component$Name$gen2 = function (aa) {
+	return A4(
+		$elm$random$Random$map3,
+		F3(
+			function (a, b, c) {
+				return $author$project$RPG$Component$Name$up(
+					_Utils_ap(
+						a,
+						_Utils_ap(b, c)));
+			}),
+		A2($elm$random$Random$uniform, 'b', $author$project$RPG$Component$Name$initials),
+		$author$project$RPG$Component$Name$gen3(aa),
+		A2($elm$random$Random$uniform, 'b', $author$project$RPG$Component$Name$finals));
+};
+var $author$project$RPG$Component$Name$gen1 = A3(
+	$elm$random$Random$map2,
+	F2(
+		function (a, b) {
+			return a + (' ' + b);
+		}),
+	$author$project$RPG$Component$Name$gen2(2),
+	$author$project$RPG$Component$Name$gen2(3));
+var $elm$random$Random$step = F2(
+	function (_v0, seed) {
+		var generator = _v0.a;
+		return generator(seed);
+	});
+var $author$project$RPG$Component$Name$spawn = function (seed) {
+	return A2($elm$random$Random$step, $author$project$RPG$Component$Name$gen1, seed);
+};
 var $author$project$RPG$Component$Position$spawn = function (_v0) {
 	var x = _v0.x;
 	var y = _v0.y;
@@ -7236,6 +7546,17 @@ var $author$project$RPG$Component$Body$spec = A2(
 			return _Utils_update(
 				world,
 				{body: comps});
+		}));
+var $author$project$RPG$Component$Name$spec = A2(
+	$justgook$elm_game_logic$Logic$Component$Spec,
+	function ($) {
+		return $.name;
+	},
+	F2(
+		function (comps, world) {
+			return _Utils_update(
+				world,
+				{name: comps});
 		}));
 var $author$project$RPG$Component$Path$spec = A2(
 	$justgook$elm_game_logic$Logic$Component$Spec,
@@ -7519,7 +7840,20 @@ var $author$project$RPG$World$spawn = function (_v0) {
 								$elm$core$Basics$composeR,
 								$justgook$elm_game_logic$Logic$Entity$with(
 									_Utils_Tuple2($author$project$RPG$Component$Ai$spec, $author$project$RPG$Component$Ai$spawn)),
-								$elm$core$Tuple$second)))))));
+								A2(
+									$elm$core$Basics$composeR,
+									function (_v1) {
+										var id = _v1.a;
+										var w = _v1.b;
+										return A2(
+											$justgook$elm_game_logic$Logic$Entity$with,
+											_Utils_Tuple2(
+												$author$project$RPG$Component$Name$spec,
+												$author$project$RPG$Component$Name$spawn(
+													$elm$random$Random$initialSeed(id)).a),
+											_Utils_Tuple2(id, w));
+									},
+									$elm$core$Tuple$second))))))));
 };
 var $author$project$RPG$World$world = function () {
 	var you = 5;
@@ -7543,6 +7877,7 @@ var $author$project$RPG$World$world = function () {
 					grid: A2($author$project$RPG$Component$Grid$empty, 10, 10),
 					id: $author$project$RPG$Component$IdSource$empty(0),
 					mouse: $author$project$RPG$Component$Pointer$empty,
+					name: $author$project$RPG$Component$Name$empty,
 					p: $author$project$RPG$Component$Position$empty,
 					path: $author$project$RPG$Component$Path$empty,
 					seed: $elm$random$Random$initialSeed(42),
@@ -8777,52 +9112,6 @@ var $elm$core$Tuple$mapFirst = F2(
 			func(x),
 			y);
 	});
-var $elm$random$Random$Generator = function (a) {
-	return {$: 'Generator', a: a};
-};
-var $elm$core$Basics$abs = function (n) {
-	return (n < 0) ? (-n) : n;
-};
-var $elm$core$Bitwise$xor = _Bitwise_xor;
-var $elm$random$Random$peel = function (_v0) {
-	var state = _v0.a;
-	var word = (state ^ (state >>> ((state >>> 28) + 4))) * 277803737;
-	return ((word >>> 22) ^ word) >>> 0;
-};
-var $elm$random$Random$float = F2(
-	function (a, b) {
-		return $elm$random$Random$Generator(
-			function (seed0) {
-				var seed1 = $elm$random$Random$next(seed0);
-				var range = $elm$core$Basics$abs(b - a);
-				var n1 = $elm$random$Random$peel(seed1);
-				var n0 = $elm$random$Random$peel(seed0);
-				var lo = (134217727 & n1) * 1.0;
-				var hi = (67108863 & n0) * 1.0;
-				var val = ((hi * 134217728.0) + lo) / 9007199254740992.0;
-				var scaled = (val * range) + a;
-				return _Utils_Tuple2(
-					scaled,
-					$elm$random$Random$next(seed1));
-			});
-	});
-var $elm$random$Random$map2 = F3(
-	function (func, _v0, _v1) {
-		var genA = _v0.a;
-		var genB = _v1.a;
-		return $elm$random$Random$Generator(
-			function (seed0) {
-				var _v2 = genA(seed0);
-				var a = _v2.a;
-				var seed1 = _v2.b;
-				var _v3 = genB(seed1);
-				var b = _v3.a;
-				var seed2 = _v3.b;
-				return _Utils_Tuple2(
-					A2(func, a, b),
-					seed2);
-			});
-	});
 var $author$project$RPG$System$Ai$randPath = function (_v0) {
 	var top = _v0.top;
 	var right = _v0.right;
@@ -8841,11 +9130,6 @@ var $justgook$elm_game_logic$Logic$Component$set = F3(
 			id,
 			$elm$core$Maybe$Just(value),
 			components);
-	});
-var $elm$random$Random$step = F2(
-	function (_v0, seed) {
-		var generator = _v0.a;
-		return generator(seed);
 	});
 var $author$project$RPG$System$Ai$step = F6(
 	function (toGrid, screen, i, path, _v0, acc) {
@@ -9517,47 +9801,14 @@ var $author$project$RPG$System$Path$system = F2(
 			$author$project$RPG$Component$Animation$spec,
 			world);
 	});
-var $elm$core$Maybe$map3 = F4(
-	function (func, ma, mb, mc) {
-		if (ma.$ === 'Nothing') {
-			return $elm$core$Maybe$Nothing;
+var $justgook$elm_game_logic$Logic$System$applyMaybe = F3(
+	function (m, f, world) {
+		if (m.$ === 'Just') {
+			var a = m.a;
+			return A2(f, a, world);
 		} else {
-			var a = ma.a;
-			if (mb.$ === 'Nothing') {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var b = mb.a;
-				if (mc.$ === 'Nothing') {
-					return $elm$core$Maybe$Nothing;
-				} else {
-					var c = mc.a;
-					return $elm$core$Maybe$Just(
-						A3(func, a, b, c));
-				}
-			}
+			return world;
 		}
-	});
-var $justgook$elm_game_logic$Logic$System$foldl3 = F5(
-	function (f, comp1, comp2, comp3, acc_) {
-		return A3(
-			$justgook$elm_game_logic$Logic$Internal$indexedFoldlArray,
-			F3(
-				function (n, value, acc) {
-					return A2(
-						$elm$core$Maybe$withDefault,
-						acc,
-						A4(
-							$elm$core$Maybe$map3,
-							F3(
-								function (a, b, c) {
-									return A4(f, a, b, c, acc);
-								}),
-							value,
-							A2($justgook$elm_game_logic$Logic$Component$get, n, comp2),
-							A2($justgook$elm_game_logic$Logic$Component$get, n, comp3)));
-				}),
-			acc_,
-			comp1);
 	});
 var $justgook$webgl_shape$WebGL$Shape2d$Form = F3(
 	function (a, b, c) {
@@ -9799,13 +10050,13 @@ var $justgook$webgl_playground$Playground$Extra$tile = F4(
 				y: 0
 			});
 	});
-var $author$project$RPG$Component$Asset$Body$tile = function (url) {
+var $author$project$RPG$Asset$Body$tile = function (url) {
 	return A3($justgook$webgl_playground$Playground$Extra$tile, 64, 64, 'assets/lpc/body/' + url);
 };
-var $author$project$RPG$Component$Asset$Body$femaleBase = $author$project$RPG$Component$Asset$Body$tile('female/base.png');
-var $author$project$RPG$Component$Asset$Body$femaleDrake = $author$project$RPG$Component$Asset$Body$tile('female/drake.png');
-var $author$project$RPG$Component$Asset$Body$femaleLizard = $author$project$RPG$Component$Asset$Body$tile('female/lizard.png');
-var $author$project$RPG$Component$Asset$Body$femaleOrc = $author$project$RPG$Component$Asset$Body$tile('female/orc.png');
+var $author$project$RPG$Asset$Body$femaleBase = $author$project$RPG$Asset$Body$tile('female/base.png');
+var $author$project$RPG$Asset$Body$femaleDrake = $author$project$RPG$Asset$Body$tile('female/drake.png');
+var $author$project$RPG$Asset$Body$femaleLizard = $author$project$RPG$Asset$Body$tile('female/lizard.png');
+var $author$project$RPG$Asset$Body$femaleOrc = $author$project$RPG$Asset$Body$tile('female/orc.png');
 var $justgook$webgl_shape$WebGL$Shape2d$Group = function (a) {
 	return {$: 'Group', a: a};
 };
@@ -9855,52 +10106,94 @@ var $author$project$RPG$Component$Animation$index = function (_v0) {
 		}
 	}());
 };
-var $author$project$RPG$Component$Asset$Body$maleBase = $author$project$RPG$Component$Asset$Body$tile('male/base.png');
-var $author$project$RPG$Component$Asset$Body$maleDrake = $author$project$RPG$Component$Asset$Body$tile('male/drake.png');
-var $author$project$RPG$Component$Asset$Body$maleLizard = $author$project$RPG$Component$Asset$Body$tile('male/lizard.png');
-var $author$project$RPG$Component$Asset$Body$maleOrc = $author$project$RPG$Component$Asset$Body$tile('male/orc.png');
-var $author$project$RPG$Component$Asset$Body$shadow = $author$project$RPG$Component$Asset$Body$tile('shadow.png');
-var $author$project$RPG$Component$Asset$Body$skeleton = $author$project$RPG$Component$Asset$Body$tile('skeleton.png');
-var $author$project$RPG$Component$Asset$Body$zombie = $author$project$RPG$Component$Asset$Body$tile('zombie.png');
-var $author$project$RPG$Component$Asset$Body$get = F2(
+var $author$project$RPG$Asset$Body$maleBase = $author$project$RPG$Asset$Body$tile('male/base.png');
+var $author$project$RPG$Asset$Body$maleDrake = $author$project$RPG$Asset$Body$tile('male/drake.png');
+var $author$project$RPG$Asset$Body$maleLizard = $author$project$RPG$Asset$Body$tile('male/lizard.png');
+var $author$project$RPG$Asset$Body$maleOrc = $author$project$RPG$Asset$Body$tile('male/orc.png');
+var $author$project$RPG$Asset$Body$shadow = $author$project$RPG$Asset$Body$tile('shadow.png');
+var $author$project$RPG$Asset$Body$skeleton = $author$project$RPG$Asset$Body$tile('skeleton.png');
+var $author$project$RPG$Asset$Body$zombie = $author$project$RPG$Asset$Body$tile('zombie.png');
+var $author$project$RPG$Asset$Body$get = F2(
 	function (body, action) {
 		var i = $author$project$RPG$Component$Animation$index(action);
 		return $justgook$webgl_playground$Playground$group(
 			_List_fromArray(
 				[
-					$author$project$RPG$Component$Asset$Body$shadow(i),
+					$author$project$RPG$Asset$Body$shadow(i),
 					function () {
 					switch (body.$) {
 						case 'Male':
 							var eyes = body.a;
 							var ears = body.b;
 							var nose = body.c;
-							return $author$project$RPG$Component$Asset$Body$maleBase(i);
+							return $author$project$RPG$Asset$Body$maleBase(i);
 						case 'MaleOrc':
-							return $author$project$RPG$Component$Asset$Body$maleOrc(i);
+							return $author$project$RPG$Asset$Body$maleOrc(i);
 						case 'MaleDrake':
-							return $author$project$RPG$Component$Asset$Body$maleDrake(i);
+							return $author$project$RPG$Asset$Body$maleDrake(i);
 						case 'MaleLizard':
-							return $author$project$RPG$Component$Asset$Body$maleLizard(i);
+							return $author$project$RPG$Asset$Body$maleLizard(i);
 						case 'Skeleton':
-							return $author$project$RPG$Component$Asset$Body$skeleton(i);
+							return $author$project$RPG$Asset$Body$skeleton(i);
 						case 'Zombie':
 							var blood = body.a;
-							return $author$project$RPG$Component$Asset$Body$zombie(i);
+							return $author$project$RPG$Asset$Body$zombie(i);
 						case 'Female':
 							var eyes = body.a;
 							var ears = body.b;
 							var nose = body.c;
-							return $author$project$RPG$Component$Asset$Body$femaleBase(i);
+							return $author$project$RPG$Asset$Body$femaleBase(i);
 						case 'FemaleOrc':
-							return $author$project$RPG$Component$Asset$Body$femaleOrc(i);
+							return $author$project$RPG$Asset$Body$femaleOrc(i);
 						case 'FemaleDrake':
-							return $author$project$RPG$Component$Asset$Body$femaleDrake(i);
+							return $author$project$RPG$Asset$Body$femaleDrake(i);
 						default:
-							return $author$project$RPG$Component$Asset$Body$femaleLizard(i);
+							return $author$project$RPG$Asset$Body$femaleLizard(i);
 					}
 				}()
 				]));
+	});
+var $elm$core$Maybe$map3 = F4(
+	function (func, ma, mb, mc) {
+		if (ma.$ === 'Nothing') {
+			return $elm$core$Maybe$Nothing;
+		} else {
+			var a = ma.a;
+			if (mb.$ === 'Nothing') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var b = mb.a;
+				if (mc.$ === 'Nothing') {
+					return $elm$core$Maybe$Nothing;
+				} else {
+					var c = mc.a;
+					return $elm$core$Maybe$Just(
+						A3(func, a, b, c));
+				}
+			}
+		}
+	});
+var $justgook$elm_game_logic$Logic$System$indexedFoldl3 = F5(
+	function (f, comp1, comp2, comp3, acc_) {
+		return A3(
+			$justgook$elm_game_logic$Logic$Internal$indexedFoldlArray,
+			F3(
+				function (n, value, acc) {
+					return A2(
+						$elm$core$Maybe$withDefault,
+						acc,
+						A4(
+							$elm$core$Maybe$map3,
+							F3(
+								function (a, b, c) {
+									return A5(f, n, a, b, c, acc);
+								}),
+							value,
+							A2($justgook$elm_game_logic$Logic$Component$get, n, comp2),
+							A2($justgook$elm_game_logic$Logic$Component$get, n, comp3)));
+				}),
+			acc_,
+			comp1);
 	});
 var $justgook$webgl_playground$Playground$move = F3(
 	function (dx, dy, _v0) {
@@ -9916,6 +10209,21 @@ var $justgook$webgl_playground$Playground$move = F3(
 			_Utils_update(
 				shape,
 				{x: x + dx, y: y + dy}));
+	});
+var $justgook$webgl_playground$Playground$moveY = F2(
+	function (dy, _v0) {
+		var shape = _v0.a;
+		var x = shape.x;
+		var y = shape.y;
+		var a = shape.a;
+		var sx = shape.sx;
+		var sy = shape.sy;
+		var o = shape.o;
+		var form = shape.form;
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			_Utils_update(
+				shape,
+				{y: y + dy}));
 	});
 var $author$project$RPG$System$Render$px = A2($elm$core$Basics$composeR, $elm$core$Basics$round, $elm$core$Basics$toFloat);
 var $justgook$webgl_playground$Playground$intFromHexChar = function (s) {
@@ -10080,12 +10388,377 @@ var $justgook$webgl_playground$Playground$square = F2(
 				y: 0
 			});
 	});
+var $elm$core$Basics$clamp = F3(
+	function (low, high, number) {
+		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
+	});
+var $justgook$webgl_playground$Playground$colorClamp = function (n) {
+	return A3(
+		$elm$core$Basics$clamp,
+		0,
+		255,
+		$elm$core$Basics$round(n));
+};
+var $justgook$webgl_playground$Playground$rgb = F3(
+	function (r, g, b) {
+		return A3(
+			$elm_explorations$linear_algebra$Math$Vector3$vec3,
+			$justgook$webgl_playground$Playground$colorClamp(r) / 255,
+			$justgook$webgl_playground$Playground$colorClamp(g) / 255,
+			$justgook$webgl_playground$Playground$colorClamp(b) / 255);
+	});
+var $elm$core$Dict$get = F2(
+	function (targetKey, dict) {
+		get:
+		while (true) {
+			if (dict.$ === 'RBEmpty_elm_builtin') {
+				return $elm$core$Maybe$Nothing;
+			} else {
+				var key = dict.b;
+				var value = dict.c;
+				var left = dict.d;
+				var right = dict.e;
+				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
+				switch (_v1.$) {
+					case 'LT':
+						var $temp$targetKey = targetKey,
+							$temp$dict = left;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+					case 'EQ':
+						return $elm$core$Maybe$Just(value);
+					default:
+						var $temp$targetKey = targetKey,
+							$temp$dict = right;
+						targetKey = $temp$targetKey;
+						dict = $temp$dict;
+						continue get;
+				}
+			}
+		}
+	});
+var $elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
+		}
+	});
+var $elm$core$List$concat = function (lists) {
+	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
+};
+var $author$project$RPG$Asset$Text$letters = $elm$core$Dict$fromList(
+	A2(
+		$elm$core$List$indexedMap,
+		F2(
+			function (a, b) {
+				return _Utils_Tuple2(b, a);
+			}),
+		$elm$core$List$concat(
+			_List_fromArray(
+				[
+					_List_fromArray(
+					[
+						_Utils_chr('\u00A0'),
+						_Utils_chr('!'),
+						_Utils_chr('\"'),
+						_Utils_chr('#'),
+						_Utils_chr('$'),
+						_Utils_chr('%'),
+						_Utils_chr('&'),
+						_Utils_chr('\''),
+						_Utils_chr('('),
+						_Utils_chr(')'),
+						_Utils_chr('*'),
+						_Utils_chr('+'),
+						_Utils_chr(','),
+						_Utils_chr('-'),
+						_Utils_chr('.'),
+						_Utils_chr('/'),
+						_Utils_chr('0'),
+						_Utils_chr('1')
+					]),
+					_List_fromArray(
+					[
+						_Utils_chr('2'),
+						_Utils_chr('3'),
+						_Utils_chr('4'),
+						_Utils_chr('5'),
+						_Utils_chr('6'),
+						_Utils_chr('7'),
+						_Utils_chr('8'),
+						_Utils_chr('9'),
+						_Utils_chr(':'),
+						_Utils_chr(';'),
+						_Utils_chr('<'),
+						_Utils_chr('='),
+						_Utils_chr('>'),
+						_Utils_chr('?'),
+						_Utils_chr('@'),
+						_Utils_chr('A'),
+						_Utils_chr('B'),
+						_Utils_chr('C'),
+						_Utils_chr(' ')
+					]),
+					_List_fromArray(
+					[
+						_Utils_chr('D'),
+						_Utils_chr('E'),
+						_Utils_chr('F'),
+						_Utils_chr('G'),
+						_Utils_chr('H'),
+						_Utils_chr('I'),
+						_Utils_chr('J'),
+						_Utils_chr('K'),
+						_Utils_chr('L'),
+						_Utils_chr('M'),
+						_Utils_chr('N'),
+						_Utils_chr('O'),
+						_Utils_chr('P'),
+						_Utils_chr('Q'),
+						_Utils_chr('R'),
+						_Utils_chr('S'),
+						_Utils_chr('T'),
+						_Utils_chr('U')
+					]),
+					_List_fromArray(
+					[
+						_Utils_chr('V'),
+						_Utils_chr('W'),
+						_Utils_chr('X'),
+						_Utils_chr('Y'),
+						_Utils_chr('Z'),
+						_Utils_chr('['),
+						_Utils_chr('\\'),
+						_Utils_chr(']'),
+						_Utils_chr('^'),
+						_Utils_chr('_'),
+						_Utils_chr('`'),
+						_Utils_chr('a'),
+						_Utils_chr('b'),
+						_Utils_chr('c'),
+						_Utils_chr('d'),
+						_Utils_chr('e'),
+						_Utils_chr('f'),
+						_Utils_chr('g')
+					]),
+					_List_fromArray(
+					[
+						_Utils_chr('h'),
+						_Utils_chr('i'),
+						_Utils_chr('j'),
+						_Utils_chr('k'),
+						_Utils_chr('l'),
+						_Utils_chr('m'),
+						_Utils_chr('n'),
+						_Utils_chr('o'),
+						_Utils_chr('p'),
+						_Utils_chr('q'),
+						_Utils_chr('r'),
+						_Utils_chr('s'),
+						_Utils_chr('t'),
+						_Utils_chr('u'),
+						_Utils_chr('v'),
+						_Utils_chr('w'),
+						_Utils_chr('x'),
+						_Utils_chr('y')
+					]),
+					_List_fromArray(
+					[
+						_Utils_chr('z'),
+						_Utils_chr('{'),
+						_Utils_chr('|'),
+						_Utils_chr('}'),
+						_Utils_chr('~')
+					])
+				]))));
+var $author$project$RPG$Asset$Text$getIndex = function (c) {
+	return A2(
+		$elm$core$Maybe$withDefault,
+		0,
+		A2($elm$core$Dict$get, c, $author$project$RPG$Asset$Text$letters));
+};
+var $author$project$WebGL$Ui$Internal$defaultEntitySettings = _List_fromArray(
+	[
+		A2($elm_explorations$webgl$WebGL$Settings$Blend$add, $elm_explorations$webgl$WebGL$Settings$Blend$srcAlpha, $elm_explorations$webgl$WebGL$Settings$Blend$oneMinusSrcAlpha),
+		A4($elm_explorations$webgl$WebGL$Settings$colorMask, true, true, true, false)
+	]);
+var $author$project$WebGL$Ui$Internal$fragImageColor = {
+	src: '\n        precision mediump float;\n        varying vec2 uv;\n        uniform vec2 uImgSize;\n        uniform sampler2D uImg;\n        uniform vec4 color;\n        void main () {\n            vec2 pixel = ((floor(uv * uImgSize) + 0.5) * 2.0 ) / uImgSize / 2.0;\n            gl_FragColor = texture2D(uImg, pixel) * color;\n        }\n    ',
+	attributes: {},
+	uniforms: {color: 'color', uImg: 'uImg', uImgSize: 'uImgSize'}
+};
+var $author$project$WebGL$Ui$Internal$mesh = $elm_explorations$webgl$WebGL$triangleStrip(
+	_List_fromArray(
+		[
+			{
+			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, -1)
+		},
+			{
+			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, 1)
+		},
+			{
+			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, -1)
+		},
+			{
+			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, 1)
+		}
+		]));
+var $author$project$WebGL$Ui$Internal$setAlpha = A2(
+	$elm$core$Basics$composeR,
+	$elm_explorations$linear_algebra$Math$Vector3$toRecord,
+	function (a) {
+		return A3($elm_explorations$linear_algebra$Math$Vector4$vec4, a.x, a.y, a.z);
+	});
+var $author$project$WebGL$Ui$Internal$vertTile = {
+	src: '\n            precision mediump float;\n            attribute vec2 aP;\n            uniform vec4 uT;\n            uniform vec2 uP;\n            uniform float index;\n            uniform vec2 spriteSize;\n            uniform vec2 uImgSize;\n            varying vec2 uv;\n            vec2 edgeFix = vec2(0.0000001, -0.0000001);\n            void main () {\n                vec2 ratio = spriteSize / uImgSize;\n                float row = (uImgSize.y / spriteSize.y - 1.0) - floor((index + 0.5) * ratio.x);\n                float column = floor(mod((index + 0.5), uImgSize.x / spriteSize.x));\n                vec2 offset = vec2(column, row) * ratio;\n                uv = (aP * 0.5 + 0.5) * ratio + offset + edgeFix;\n                gl_Position = vec4(aP * mat2(uT) + uP, 0.0, 1.0);\n            }\n        ',
+	attributes: {aP: 'aP'},
+	uniforms: {index: 'index', spriteSize: 'spriteSize', uImgSize: 'uImgSize', uP: 'uP', uT: 'uT'}
+};
+var $author$project$WebGL$Ui$Text$tileWithColor = F8(
+	function (spriteSheet, spriteSize, imageSize, color, index, translate, scaleRotateSkew, opacity) {
+		return A5(
+			$elm_explorations$webgl$WebGL$entityWith,
+			$author$project$WebGL$Ui$Internal$defaultEntitySettings,
+			$author$project$WebGL$Ui$Internal$vertTile,
+			$author$project$WebGL$Ui$Internal$fragImageColor,
+			$author$project$WebGL$Ui$Internal$mesh,
+			{
+				color: A2($author$project$WebGL$Ui$Internal$setAlpha, color, opacity),
+				index: index,
+				spriteSize: spriteSize,
+				uA: opacity,
+				uImg: spriteSheet,
+				uImgSize: imageSize,
+				uP: translate,
+				uT: scaleRotateSkew
+			});
+	});
+var $author$project$WebGL$Ui$Text$char = F8(
+	function (spriteSheet, imageSize, w, h, color, x, y, index) {
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			{
+				a: 0,
+				form: A3(
+					$justgook$webgl_shape$WebGL$Shape2d$Form,
+					w,
+					h,
+					A5(
+						$author$project$WebGL$Ui$Text$tileWithColor,
+						spriteSheet,
+						A2($elm_explorations$linear_algebra$Math$Vector2$vec2, w, h),
+						imageSize,
+						color,
+						index)),
+				o: 1,
+				sx: 1,
+				sy: 1,
+				x: x,
+				y: y
+			});
+	});
+var $author$project$WebGL$Ui$Text$draw = F4(
+	function (fn, charW, charH, string) {
+		var output = A3(
+			$elm$core$List$foldl,
+			fn,
+			{chars: _List_Nil, width: 0, x: charW, y: charH},
+			$elm$core$String$toList(string));
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			{
+				a: 0,
+				form: $justgook$webgl_shape$WebGL$Shape2d$Group(output.chars),
+				o: 1,
+				sx: 1,
+				sy: 1,
+				x: A2($elm$core$Basics$max, output.x, output.width) * (-0.5),
+				y: (output.y * (-0.5)) + (0.5 * (-charH))
+			});
+	});
+var $elm$core$Tuple$mapBoth = F3(
+	function (funcA, funcB, _v0) {
+		var x = _v0.a;
+		var y = _v0.b;
+		return _Utils_Tuple2(
+			funcA(x),
+			funcB(y));
+	});
+var $author$project$WebGL$Ui$Text$outputFold = F6(
+	function (toChar, getIndex, w, h, c, _v0) {
+		var chars = _v0.chars;
+		var x = _v0.x;
+		var y = _v0.y;
+		var width = _v0.width;
+		return _Utils_eq(
+			c,
+			_Utils_chr('\n')) ? {
+			chars: chars,
+			width: A2($elm$core$Basics$max, width, x),
+			x: w,
+			y: y - h
+		} : {
+			chars: A2(
+				$elm$core$List$cons,
+				A3(
+					toChar,
+					x,
+					y,
+					getIndex(c)),
+				chars),
+			width: width,
+			x: x + w,
+			y: y
+		};
+	});
+var $author$project$WebGL$Ui$Text$tileFont = F3(
+	function (_v0, color, string) {
+		var charW = _v0.charW;
+		var charH = _v0.charH;
+		var src = _v0.src;
+		var getIndex = _v0.getIndex;
+		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
+			{
+				a: 0,
+				form: A2(
+					$justgook$webgl_shape$WebGL$Shape2d$Textured,
+					src,
+					function (t) {
+						var _v1 = A3(
+							$elm$core$Tuple$mapBoth,
+							$elm$core$Basics$toFloat,
+							$elm$core$Basics$toFloat,
+							$elm_explorations$webgl$WebGL$Texture$size(t));
+						var imgW = _v1.a;
+						var imgH = _v1.b;
+						var imgSize = A2($elm_explorations$linear_algebra$Math$Vector2$vec2, imgW, imgH);
+						var toChar = A5($author$project$WebGL$Ui$Text$char, t, imgSize, charW, charH, color);
+						return A4(
+							$author$project$WebGL$Ui$Text$draw,
+							A4($author$project$WebGL$Ui$Text$outputFold, toChar, getIndex, charW, charH),
+							charW,
+							charH,
+							string);
+					}),
+				o: 1,
+				sx: 1,
+				sy: 1,
+				x: 0,
+				y: 0
+			});
+	});
+var $author$project$WebGL$Ui$tileFont = $author$project$WebGL$Ui$Text$tileFont;
+var $author$project$RPG$Asset$Text$tileFont = $author$project$WebGL$Ui$tileFont(
+	{charH: 9, charW: 7, getIndex: $author$project$RPG$Asset$Text$getIndex, src: 'assets/ui/charmap-oldschool_white.png'});
+var $author$project$RPG$Asset$Text$text = $author$project$RPG$Asset$Text$tileFont(
+	A3($justgook$webgl_playground$Playground$rgb, 18, 147, 216));
 var $author$project$RPG$System$Render$character = function (world) {
 	return $justgook$webgl_playground$Playground$group(
 		A5(
-			$justgook$elm_game_logic$Logic$System$foldl3,
-			F3(
-				function (_v0, body, action) {
+			$justgook$elm_game_logic$Logic$System$indexedFoldl3,
+			F4(
+				function (i, _v0, body, action) {
 					var x = _v0.x;
 					var y = _v0.y;
 					return $elm$core$List$cons(
@@ -10094,12 +10767,28 @@ var $author$project$RPG$System$Render$character = function (world) {
 							$author$project$RPG$System$Render$px(x),
 							$author$project$RPG$System$Render$px(y),
 							$justgook$webgl_playground$Playground$group(
-								(world.debug ? $elm$core$List$cons(
-									A2($justgook$webgl_playground$Playground$square, $justgook$webgl_playground$Playground$red, 32)) : $elm$core$Basics$identity)(
-									_List_fromArray(
-										[
-											A2($author$project$RPG$Component$Asset$Body$get, body, action)
-										])))));
+								A3(
+									$justgook$elm_game_logic$Logic$System$applyMaybe,
+									A2($justgook$elm_game_logic$Logic$Component$get, i, world.name),
+									F2(
+										function (a, w) {
+											return A2(
+												$elm$core$List$cons,
+												A2(
+													$justgook$webgl_playground$Playground$moveY,
+													24,
+													$author$project$RPG$Asset$Text$text(a)),
+												w);
+										}),
+									A3(
+										$justgook$elm_game_logic$Logic$System$applyIf,
+										world.debug,
+										$elm$core$List$cons(
+											A2($justgook$webgl_playground$Playground$square, $justgook$webgl_playground$Playground$red, 32)),
+										_List_fromArray(
+											[
+												A2($author$project$RPG$Asset$Body$get, body, action)
+											]))))));
 				}),
 			$author$project$RPG$Component$Position$spec.get(world),
 			$author$project$RPG$Component$Body$spec.get(world),
@@ -10120,21 +10809,6 @@ var $justgook$webgl_playground$Playground$moveX = F2(
 			_Utils_update(
 				shape,
 				{x: x + dx}));
-	});
-var $justgook$webgl_playground$Playground$moveY = F2(
-	function (dy, _v0) {
-		var shape = _v0.a;
-		var x = shape.x;
-		var y = shape.y;
-		var a = shape.a;
-		var sx = shape.sx;
-		var sy = shape.sy;
-		var o = shape.o;
-		var form = shape.form;
-		return $justgook$webgl_shape$WebGL$Shape2d$Shape2d(
-			_Utils_update(
-				shape,
-				{y: y + dy}));
 	});
 var $justgook$webgl_playground$Playground$rectangle = F3(
 	function (color, width, height) {
@@ -10219,25 +10893,6 @@ var $author$project$RPG$System$Render$Fx$system = function (world) {
 			world.p,
 			_List_Nil));
 };
-var $elm$core$Basics$clamp = F3(
-	function (low, high, number) {
-		return (_Utils_cmp(number, low) < 0) ? low : ((_Utils_cmp(number, high) > 0) ? high : number);
-	});
-var $justgook$webgl_playground$Playground$colorClamp = function (n) {
-	return A3(
-		$elm$core$Basics$clamp,
-		0,
-		255,
-		$elm$core$Basics$round(n));
-};
-var $justgook$webgl_playground$Playground$rgb = F3(
-	function (r, g, b) {
-		return A3(
-			$elm_explorations$linear_algebra$Math$Vector3$vec3,
-			$justgook$webgl_playground$Playground$colorClamp(r) / 255,
-			$justgook$webgl_playground$Playground$colorClamp(g) / 255,
-			$justgook$webgl_playground$Playground$colorClamp(b) / 255);
-	});
 var $author$project$RPG$System$Render$Ui$blue = A3($justgook$webgl_playground$Playground$rgb, 89, 125, 206);
 var $author$project$RPG$System$Render$Ui$config = {height: 64, padding: 16};
 var $justgook$webgl_playground$Playground$fade = F2(
@@ -10355,32 +11010,11 @@ var $author$project$RPG$System$Render$Ui$health = F3(
 					A3($justgook$webgl_playground$Playground$rectangle, $author$project$RPG$System$Render$Ui$blue1, 50 * m, 2))
 				]));
 	});
-var $author$project$WebGL$Ui$Internal$defaultEntitySettings = _List_fromArray(
-	[
-		A2($elm_explorations$webgl$WebGL$Settings$Blend$add, $elm_explorations$webgl$WebGL$Settings$Blend$srcAlpha, $elm_explorations$webgl$WebGL$Settings$Blend$oneMinusSrcAlpha),
-		A4($elm_explorations$webgl$WebGL$Settings$colorMask, true, true, true, false)
-	]);
 var $author$project$WebGL$Ui$Slice$fragSprite = {
 	src: '\n        precision mediump float;\n        varying vec2 uv;\n        uniform vec2 uImgSize;\n        uniform sampler2D uImg;\n        uniform float uA;\n        uniform vec4 uUV;\n        uniform vec2 uUV2;\n        void main () {\n            vec2 uv2 = uUV.xy + (fract(uv * uUV2) * uUV.zw);\n            vec2 pixel = (floor(uv2 * uImgSize) + 0.5) / uImgSize;\n            gl_FragColor = texture2D(uImg, pixel);\n            gl_FragColor.a *= uA;\n        }\n    ',
 	attributes: {},
 	uniforms: {uA: 'uA', uImg: 'uImg', uImgSize: 'uImgSize', uUV: 'uUV', uUV2: 'uUV2'}
 };
-var $author$project$WebGL$Ui$Slice$mesh = $elm_explorations$webgl$WebGL$triangleStrip(
-	_List_fromArray(
-		[
-			{
-			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, -1)
-		},
-			{
-			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, -1, 1)
-		},
-			{
-			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, -1)
-		},
-			{
-			aP: A2($elm_explorations$linear_algebra$Math$Vector2$vec2, 1, 1)
-		}
-		]));
 var $author$project$WebGL$Ui$Slice$vertSprite = {
 	src: '\n            precision mediump float;\n            attribute vec2 aP;\n            uniform vec4 uT;\n            uniform vec2 uP;\n            varying vec2 uv;\n            vec2 edgeFix = vec2(0.0000001, -0.0000001);\n            void main () {\n                uv = aP * .5 + 0.5 + edgeFix;\n                gl_Position = vec4(aP * mat2(uT) + uP, 0., 1.0);\n            }\n        ',
 	attributes: {aP: 'aP'},
@@ -10393,7 +11027,7 @@ var $author$project$WebGL$Ui$Slice$spriteRender = F7(
 			$author$project$WebGL$Ui$Internal$defaultEntitySettings,
 			$author$project$WebGL$Ui$Slice$vertSprite,
 			$author$project$WebGL$Ui$Slice$fragSprite,
-			$author$project$WebGL$Ui$Slice$mesh,
+			$author$project$WebGL$Ui$Internal$mesh,
 			{uA: opacity, uImg: image_, uImgSize: imageSize, uP: uP, uT: uT, uUV: uv, uUV2: uv2});
 	});
 var $author$project$WebGL$Ui$repeat = F4(
@@ -10641,14 +11275,6 @@ var $justgook$webgl_playground$Playground$Extra$Font$char = F8(
 				y: y
 			});
 	});
-var $elm$core$Tuple$mapBoth = F3(
-	function (funcA, funcB, _v0) {
-		var x = _v0.a;
-		var y = _v0.b;
-		return _Utils_Tuple2(
-			funcA(x),
-			funcB(y));
-	});
 var $justgook$webgl_playground$Playground$Extra$Font$outputFold = F6(
 	function (toChar, getIndex, w, h, c, _v0) {
 		var chars = _v0.chars;
@@ -10722,48 +11348,6 @@ var $justgook$webgl_playground$Playground$Extra$Font$tileFont = F3(
 			});
 	});
 var $justgook$webgl_playground$Playground$Font$SimpleMood$image = 'data:image/png;base64,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';
-var $elm$core$Dict$get = F2(
-	function (targetKey, dict) {
-		get:
-		while (true) {
-			if (dict.$ === 'RBEmpty_elm_builtin') {
-				return $elm$core$Maybe$Nothing;
-			} else {
-				var key = dict.b;
-				var value = dict.c;
-				var left = dict.d;
-				var right = dict.e;
-				var _v1 = A2($elm$core$Basics$compare, targetKey, key);
-				switch (_v1.$) {
-					case 'LT':
-						var $temp$targetKey = targetKey,
-							$temp$dict = left;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-					case 'EQ':
-						return $elm$core$Maybe$Just(value);
-					default:
-						var $temp$targetKey = targetKey,
-							$temp$dict = right;
-						targetKey = $temp$targetKey;
-						dict = $temp$dict;
-						continue get;
-				}
-			}
-		}
-	});
-var $elm$core$List$append = F2(
-	function (xs, ys) {
-		if (!ys.b) {
-			return xs;
-		} else {
-			return A3($elm$core$List$foldr, $elm$core$List$cons, ys, xs);
-		}
-	});
-var $elm$core$List$concat = function (lists) {
-	return A3($elm$core$List$foldr, $elm$core$List$append, _List_Nil, lists);
-};
 var $justgook$webgl_playground$Playground$Font$SimpleMood$letters_ = $elm$core$Dict$fromList(
 	A2(
 		$elm$core$List$indexedMap,

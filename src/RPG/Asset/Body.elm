@@ -1,4 +1,4 @@
-module RPG.Component.Asset.Body exposing (get)
+module RPG.Asset.Body exposing (get)
 
 import Playground exposing (Shape, group, moveY)
 import Playground.Extra

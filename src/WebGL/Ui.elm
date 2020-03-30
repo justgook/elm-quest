@@ -2,21 +2,21 @@ module WebGL.Ui exposing (repeat, slice9, tileFont)
 
 import Math.Vector2 exposing (Vec2, vec2)
 import Math.Vector4 exposing (Vec4, vec4)
-import Playground exposing (Shape, group)
 import WebGL.Shape2d exposing (Form(..), Render, Shape2d(..))
 import WebGL.Texture exposing (Texture)
 import WebGL.Ui.Slice exposing (spriteRender)
+import WebGL.Ui.Text
 
 
 tileFont =
-    group []
+    WebGL.Ui.Text.tileFont
 
 
 slice9 =
     WebGL.Ui.Slice.slice9
 
 
-repeat : String -> { xmin : Float, xmax : Float, ymin : Float, ymax : Float } -> Float -> Float -> Shape
+repeat : String -> { xmin : Float, xmax : Float, ymin : Float, ymax : Float } -> Float -> Float -> Shape2d
 repeat atlas { xmin, xmax, ymin, ymax } w_ h_ =
     let
         w =

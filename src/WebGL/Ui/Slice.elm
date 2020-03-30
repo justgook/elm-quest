@@ -5,7 +5,7 @@ import Math.Vector4 as Vec4 exposing (Vec4, vec4)
 import WebGL exposing (Mesh, Shader)
 import WebGL.Shape2d exposing (Form(..), Render, Shape2d(..))
 import WebGL.Texture exposing (Texture)
-import WebGL.Ui.Internal exposing (defaultEntitySettings)
+import WebGL.Ui.Internal exposing (defaultEntitySettings, mesh)
 
 
 slice9 atlas { bounds, slice } w h =
@@ -294,17 +294,3 @@ fragSprite =
             gl_FragColor.a *= uA;
         }
     |]
-
-
-mesh : Mesh { aP : Vec2 }
-mesh =
-    WebGL.triangleStrip
-        [ { aP = vec2 -1 -1 }
-        , { aP = vec2 -1 1 }
-        , { aP = vec2 1 -1 }
-        , { aP = vec2 1 1 }
-        ]
-
-
-
--------

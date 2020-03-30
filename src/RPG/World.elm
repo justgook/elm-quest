@@ -10,6 +10,7 @@ import RPG.Component.Equipment as Equipment exposing (Equipment)
 import RPG.Component.Fx as Fx exposing (Fx)
 import RPG.Component.Grid as Grid exposing (Grid)
 import RPG.Component.IdSource as IdSource exposing (IdSource)
+import RPG.Component.Name as Name exposing (Name)
 import RPG.Component.Path as Path exposing (Path)
 import RPG.Component.Pointer as Mouse exposing (Mouse)
 import RPG.Component.Position as Position exposing (Position)
@@ -28,6 +29,7 @@ type alias World =
     , v : Component.Set Velocity
     , equipment : Component.Set Equipment
     , body : Component.Set Body
+    , name : Component.Set Name
     , anim : Component.Set Animation
     , action : Component.Set Action
     , path : Component.Set Path
@@ -53,6 +55,7 @@ world =
     , v = Velocity.empty
     , equipment = Equipment.empty
     , body = Body.empty
+    , name = Name.empty
     , anim = Animation.empty
     , action = Action.empty
     , path = Path.empty
@@ -76,6 +79,7 @@ spawn ( body, p ) =
         >> Entity.with ( Velocity.spec, Vec2.zero )
         >> Entity.with ( Path.spec, [] )
         >> Entity.with ( Ai.spec, Ai.spawn )
+        >> (\( id, w ) -> Entity.with ( Name.spec, Name.spawn (Random.initialSeed id) |> Tuple.first ) ( id, w ))
         >> Tuple.second
 
 

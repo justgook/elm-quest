@@ -3,7 +3,7 @@ const packageJson = require("./package.json");
 const root = "gh-pages";
 
 const info = {
-    title: "WebGL Playground",
+    title: "Elm Quest",
     description: packageJson.description,
     version: packageJson.version,
     license: packageJson.license,

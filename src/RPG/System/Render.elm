@@ -1,9 +1,11 @@
 module RPG.System.Render exposing (system)
 
-import Logic.System as System
+import Logic.Component as Component
+import Logic.System as System exposing (applyIf, applyMaybe)
 import Playground exposing (..)
+import RPG.Asset.Body as BodyAsset
+import RPG.Asset.Text
 import RPG.Component.Animation as Action
-import RPG.Component.Asset.Body as BodyAsset
 import RPG.Component.Body as Body
 import RPG.Component.Position as Position
 import RPG.Game as Game
@@ -36,15 +38,12 @@ system { screen, textures, world } =
 
 character : World -> Shape
 character world =
-    System.foldl3
-        (\{ x, y } body action ->
-            [ BodyAsset.get body action ]
-                |> (if world.debug then
-                        (::) (square red 32)
-
-                    else
-                        identity
-                   )
+    System.indexedFoldl3
+        (\i { x, y } body action ->
+            [ BodyAsset.get body action
+            ]
+                |> applyIf world.debug ((::) (square red 32))
+                |> applyMaybe (Component.get i world.name) (\a w -> moveY 24 (RPG.Asset.Text.text a) :: w)
                 |> group
                 |> move (px x) (px y)
                 |> (::)

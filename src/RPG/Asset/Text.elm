@@ -1,4 +1,4 @@
-module RPG.Asset.Text exposing (text)
+module RPG.Asset.Text exposing (chat, text)
 
 import Dict
 import Playground exposing (rgb)
@@ -11,8 +11,22 @@ text =
     tileFont (rgb 18 147 216)
 
 
+chat : String -> Shape2d
+chat =
+    tileFontChat (rgb 0 0 255)
+
+
 tileFont =
     WebGL.Ui.tileFont
+        { charW = 7
+        , charH = 9
+        , src = "assets/ui/charmap-oldschool_white.png"
+        , getIndex = getIndex
+        }
+
+
+tileFontChat =
+    WebGL.Ui.tileFontLeftBottom
         { charW = 7
         , charH = 9
         , src = "assets/ui/charmap-oldschool_white.png"

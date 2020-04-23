@@ -2,6 +2,7 @@ module RPG.System.Render.Ui exposing (system)
 
 import Playground exposing (..)
 import Playground.Extra exposing (..)
+import RPG.Component.Chat as Chat
 import WebGL.Ui exposing (slice9)
 
 
@@ -16,7 +17,7 @@ config =
     }
 
 
-system { bottom, left, right, top, width } { ui } =
+system { bottom, left, right, top, width } ({ ui } as world) =
     [ --TopLeft
       [ rectangle green (width * 0.5 - config.padding) config.height |> fade 0
       , health 1 1 0.3
@@ -29,21 +30,22 @@ system { bottom, left, right, top, width } { ui } =
             (top - config.height * 0.5 - config.padding)
 
     --Top-Right
-    , [ rectangle yellow
-            (width * 0.5 - config.padding)
-            config.height
-            |> fade 0
-      ]
-        |> group
-        |> move (width * 0.25 - config.padding * 0.5)
-            (top - config.height * 0.5 - config.padding)
-
+    --, [ rectangle yellow
+    --        (width * 0.5 - config.padding)
+    --        config.height
+    --        |> fade 0
+    --  ]
+    --    |> group
+    --    |> move (width * 0.25 - config.padding * 0.5)
+    --        (top - config.height * 0.5 - config.padding)
     -- Bottom-Left
-    , [ rectangle red (width * 0.5 - config.padding) config.height
-            |> fade 0
-      , hotkeys ((width * 0.25 - config.padding - 15) / 25 |> floor |> toFloat)
+    , [ hotkeys ((width * 0.25 - config.padding - 15) / 25 |> floor |> toFloat)
             |> scale 2
       ]
+        |> (::)
+            (Chat.system world
+                |> move (left + width * 0.25 + config.padding * 0.5) (config.height * 0.5 + config.padding)
+            )
         |> group
         |> move (left + width * 0.25 + config.padding * 0.5)
             (bottom + config.height * 0.5 + config.padding)
@@ -60,7 +62,7 @@ system { bottom, left, right, top, width } { ui } =
 
     --Center
     ]
-        |> (if ui.inventory then
+        |> (if ui.inventoryOpen then
                 (::) (scale 2 inventory |> move (right - 110) (top - 175))
 
             else

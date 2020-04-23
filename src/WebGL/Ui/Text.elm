@@ -1,4 +1,4 @@
-module WebGL.Ui.Text exposing (tileFont)
+module WebGL.Ui.Text exposing (tileFont, tileFontLeftBottom)
 
 import Math.Vector2 exposing (Vec2, vec2)
 import Math.Vector3 exposing (Vec3)
@@ -7,6 +7,35 @@ import WebGL
 import WebGL.Shape2d exposing (Form(..), Shape2d(..))
 import WebGL.Texture as Texture exposing (Texture)
 import WebGL.Ui.Internal exposing (defaultEntitySettings, fragImageColor, mesh, setAlpha, vertTile)
+
+
+tileFontLeftBottom : { a | charW : Float, charH : Float, src : String, getIndex : Char -> Float } -> Vec3 -> String -> Shape2d
+tileFontLeftBottom { charW, charH, src, getIndex } color string =
+    Shape2d
+        { x = 0
+        , y = 0
+        , a = 0
+        , sx = 1
+        , sy = 1
+        , o = 1
+        , form =
+            Textured src
+                (\t ->
+                    let
+                        ( imgW, imgH ) =
+                            t
+                                |> Texture.size
+                                |> Tuple.mapBoth toFloat toFloat
+
+                        imgSize =
+                            Math.Vector2.vec2 imgW imgH
+
+                        toChar =
+                            char t imgSize charW charH color
+                    in
+                    drawChat (outputFold toChar getIndex charW charH) charW charH string
+                )
+        }
 
 
 tileFont : { a | charW : Float, charH : Float, src : String, getIndex : Char -> Float } -> Vec3 -> String -> Shape2d
@@ -48,6 +77,24 @@ draw fn charW charH string =
     Shape2d
         { x = max output.x output.width * -0.5
         , y = output.y * -0.5 + 0.5 * -charH
+        , a = 0
+        , sx = 1
+        , sy = 1
+        , o = 1
+        , form = Group output.chars
+        }
+
+
+drawChat fn charW charH string =
+    let
+        output =
+            String.toList string
+                |> List.foldl fn
+                    { chars = [], x = charW, y = charH, width = 0 }
+    in
+    Shape2d
+        { x = 0
+        , y = -output.y + 0.5 * charH
         , a = 0
         , sx = 1
         , sy = 1

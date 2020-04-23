@@ -6,9 +6,10 @@ import Playground exposing (..)
 import RPG.Asset.Body as BodyAsset
 import RPG.Asset.Text
 import RPG.Component.Animation as Action
-import RPG.Component.Body as Body
+import RPG.Component.Character as Character
 import RPG.Component.Position as Position
 import RPG.Game as Game
+import RPG.System.Render.Character as Character
 import RPG.System.Render.Fx as RenderFx
 import RPG.System.Render.Ui as RenderUi
 import RPG.World exposing (World)
@@ -19,8 +20,9 @@ import WebGL.Shape2d
 
 system : Game.Model -> ( List Entity, Set String )
 system { screen, textures, world } =
-    [ [ character world
-      , RenderFx.system world
+    [ [ RenderFx.system world
+      , character world
+      , Character.system world
       ]
         |> group
         |> move -world.grid.offset.x -world.grid.offset.y
@@ -39,7 +41,7 @@ system { screen, textures, world } =
 character : World -> Shape
 character world =
     System.indexedFoldl3
-        (\i { x, y } body action ->
+        (\i { x, y } { body } action ->
             [ BodyAsset.get body action
             ]
                 |> applyIf world.debug ((::) (square red 32))
@@ -49,7 +51,7 @@ character world =
                 |> (::)
         )
         (Position.spec.get world)
-        (Body.spec.get world)
+        (Character.spec.get world)
         (Action.spec.get world)
         []
         |> group

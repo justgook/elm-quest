@@ -7,6 +7,7 @@ import Dict exposing (Dict)
 import Html exposing (Html)
 import Html.Attributes exposing (height, width)
 import Html.Lazy
+import RPG.Asset.Cursor
 import RPG.Game as Game exposing (Message(..))
 import RPG.Subscription.Keyboard
 import RPG.Subscription.Pointer
@@ -65,9 +66,10 @@ main =
                 { title = "RPG"
                 , body =
                     [ view m
+                    , Html.Lazy.lazy2 css1 m.world.ui.cursor m.world.ui.cursor2
                     ]
                         |> (if m.world.debug then
-                                (::) (Html.Lazy.lazy2 css m.world.ui.cursor m.world.grid)
+                                (::) (Html.Lazy.lazy cssGrid m.world.grid)
 
                             else
                                 identity
@@ -85,17 +87,25 @@ main =
         }
 
 
-css cursor { offset, cellW, cellH } =
+css1 cursor cursor2 =
     Html.node "style" [] [ Html.text <| """
 html,body{
-    cursor:url(""" ++ cursor ++ """), auto;
-    margin:0;
-    padding:0;
-    overflow:hidden;
-    width:100%;
-    height:100%;
-    }
+   cursor:url(""" ++ cursor ++ """), auto;
+   margin:0;
+   padding:0;
+   overflow:hidden;
+   width:100%;
+   height:100%;
+   animation: animate .4s infinite;
+   }
 canvas{display:block}
+""" ++ cursor2 ++ """
+
+""" ]
+
+
+cssGrid { offset, cellW, cellH } =
+    Html.node "style" [] [ Html.text <| """
 body::after {
     pointer-events: none;
     content: "";

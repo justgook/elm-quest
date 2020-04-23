@@ -1,12 +1,12 @@
-module RPG.Asset.Body exposing (get)
+module RPG.Asset.Equipment exposing (get)
 
 import Playground exposing (Shape, group, moveY)
 import Playground.Extra
 import RPG.Component.Animation as Action exposing (Animation, Pose(..))
-import RPG.Component.Character exposing (Body(..))
+import RPG.Component.Character exposing (Character)
 
 
-get : Body -> Animation -> Shape
+get : Character -> Animation -> Shape
 get body action =
     let
         i =
@@ -14,45 +14,14 @@ get body action =
     in
     [ shadow i
     , case body of
-        Male eyes ears nose ->
-            maleBase i
-
-        MaleOrc ->
-            maleOrc i
-
-        MaleDrake ->
-            maleDrake i
-
-        MaleLizard ->
-            maleLizard i
-
-        Skeleton ->
-            skeleton i
-
-        Zombie blood ->
-            zombie i
-
-        Female eyes ears nose ->
-            femaleBase i
-
-        FemaleOrc ->
-            femaleOrc i
-
-        FemaleDrake ->
-            femaleDrake i
-
-        FemaleLizard ->
+        _ ->
             femaleLizard i
     ]
         |> group
 
 
-
---|> moveY 16
-
-
 tile url =
-    Playground.Extra.tile 64 64 ("assets/lpc/body/" ++ url)
+    Playground.Extra.tile 64 64 ("assets/lpc/equipment/" ++ url)
 
 
 shadow =

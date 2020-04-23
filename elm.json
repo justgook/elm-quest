@@ -14,12 +14,15 @@
             "elm/time": "1.0.0",
             "elm-explorations/linear-algebra": "1.0.3",
             "elm-explorations/webgl": "1.1.1",
+            "jschomay/elm-narrative-engine": "5.0.1",
             "justgook/alt-linear-algebra": "2.0.0",
             "justgook/elm-game-logic": "3.0.0",
             "justgook/webgl-playground": "4.0.1",
-            "justgook/webgl-shape": "1.0.0"
+            "justgook/webgl-shape": "1.0.0",
+            "rtfeldman/elm-hex": "1.0.0"
         },
         "indirect": {
+            "elm/parser": "1.1.0",
             "elm/url": "1.0.0",
             "elm/virtual-dom": "1.0.2"
         }

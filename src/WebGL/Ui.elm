@@ -1,4 +1,4 @@
-module WebGL.Ui exposing (repeat, slice9, tileFont)
+module WebGL.Ui exposing (repeat, slice9, tileFont, tileFontLeftBottom)
 
 import Math.Vector2 exposing (Vec2, vec2)
 import Math.Vector4 exposing (Vec4, vec4)
@@ -10,6 +10,10 @@ import WebGL.Ui.Text
 
 tileFont =
     WebGL.Ui.Text.tileFont
+
+
+tileFontLeftBottom =
+    WebGL.Ui.Text.tileFontLeftBottom
 
 
 slice9 =
